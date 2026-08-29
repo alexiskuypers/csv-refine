@@ -9,9 +9,14 @@ from data_contract_cli.value_transformations import (
     validate_email_value,
     validate_date,
     normalize_date,
+    format_decimal,
+    remove_accents,
+    apply_string_transformations,
+    collapse_spaces,
 )
 
 
+# Test Value conversion and validation functions.
 @pytest.mark.parametrize(
     "valid_values, expected",
     [
@@ -150,6 +155,7 @@ def test_raises_validate_date(invalid_date, date_format):
         validate_date(invalid_date, date_format)
 
 
+# Test functions apply transformations.
 @pytest.mark.parametrize(
     "valid_date, date_format, expected",
     [
@@ -162,3 +168,52 @@ def test_raises_validate_date(invalid_date, date_format):
 def test_normalize_date_returns_isoformat(valid_date, date_format, expected):
     result = normalize_date(valid_date, date_format)
     assert result == expected
+
+
+@pytest.mark.parametrize(
+    "value, expected",
+    [
+        ("5.5000", Decimal("5.50")),
+        ("5.566", Decimal("5.57")),
+        ("5.5550", Decimal("5.56")),
+        ("5.1", Decimal("5.10")),
+        ("5.544", Decimal("5.54")),
+        ("-5.50", Decimal("-5.50")),
+    ],
+)
+def test_format_decimal(value, expected):
+    content = convert_str_to_decimal(value)
+    result = format_decimal(content)
+    assert result == expected
+
+
+def test_remove_accents():
+    content = "âàéèùôûäüöÉÈÇÊ€$"
+    result = remove_accents(content)
+    assert result == "aaeeuouauoEECE€$"
+
+
+def test_collapse_spaces():
+    content = "  test  ,  te st "
+    result = collapse_spaces(content)
+    assert result == " test , te st "
+
+
+@pytest.mark.parametrize(
+    "value, transformation, expected",
+    [
+        (" test ", "strip", "test"),
+        ("TEsT", "lower", "test"),
+        ("tesT", "upper", "TEST"),
+        ("teST TeST", "title", "Test Test"),
+        ("  test  tes t  ", "collapse_spaces", " test tes t "),
+        ("élodie$", "remove_accents", "elodie$"),
+        (" tES t ", "strip, lower, collapse_spaces", "tes t"),
+    ],
+)
+def test_apply_string_transformations(value, transformation, expected):
+    result = apply_string_transformations(value=value, transformations=transformation)
+    assert result == expected
+
+
+# Test functions apply rules.
