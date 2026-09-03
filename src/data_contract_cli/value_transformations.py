@@ -1,7 +1,8 @@
-from datetime import datetime
+from datetime import datetime, date
 from decimal import Decimal, ROUND_HALF_UP
 from email_validator import EmailNotValidError, validate_email
 import unicodedata
+import re
 
 
 # Value conversion and validation functions.
@@ -43,10 +44,16 @@ def validate_email_value(mail: str) -> str:
     return result.normalized
 
 
-def validate_date(row_date: str, date_format: str) -> str:
+def validate_date(row_date: str, date_format: str) -> None | str:
     """Validate that a date string matches the expected format."""
-    datetime.strptime(row_date.strip(), date_format)
-    return row_date.strip()
+    try:
+        parsed_date = datetime.strptime(row_date.strip(), date_format).date()
+    except ValueError as e:
+        return (
+            f"Date '{row_date}' is invalid or does not match "
+            f"the expected format '{date_format}'."
+        )
+    return
 
 
 # Functions apply transformations.
@@ -85,8 +92,8 @@ def collapse_spaces(value: str) -> str:
 
 def normalize_date(row_date: str, date_format: str) -> str:
     """Convert a date string to ISO format."""
-    date = datetime.strptime(row_date.strip(), date_format).date()
-    return date.isoformat()
+    parsed_date = datetime.strptime(row_date.strip(), date_format).date()
+    return str(parsed_date.isoformat())
 
 
 def apply_string_transformations(transformations: list, value: str) -> str:
@@ -112,4 +119,25 @@ def apply_string_transformations(transformations: list, value: str) -> str:
     return value
 
 
-# Functions apply rules.
+type value = str | int | Decimal | bool
+
+
+def apply_allowed_values_rule(
+    value: value, allowed_values: list, date_format: str | None = None
+) -> str | None:
+    """Return an error message if the value is not among the allowed values."""
+    formatted_date_values = []
+
+    for item in allowed_values:
+        if isinstance(item, date) and date_format is not None:
+            date_parsed = date.strftime(item, date_format)
+            formatted_date_values.append(date_parsed)
+
+    if formatted_date_values:
+        if value not in formatted_date_values:
+            return f"Value '{value}' is not among the allowed values: {formatted_date_values}."
+
+    elif value not in allowed_values:
+        return f"the value  '{value}' not in allowed values: '{allowed_values}'"
+
+    return None

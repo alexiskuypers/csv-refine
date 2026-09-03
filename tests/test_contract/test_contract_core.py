@@ -1,8 +1,13 @@
 import pytest, yaml
 from typing import Any
+from datetime import datetime, date
 
 from data_contract_cli.exceptions import ApplicationError, YAMLContractError
-from data_contract_cli.contract_models import Contract, Columns_Contract
+from data_contract_cli.contract_models import (
+    Contract,
+    Columns_Contract,
+    VALID_DATE_FORMAT,
+)
 from data_contract_cli.contract import (
     RULES,
     TRANSFORMATION,
@@ -220,7 +225,9 @@ def test_build_column():
         "transformations": ["strip"],
     }
     column_name = "name"
-    result = build_column(column_name=column_name, metadata=metadata)
+    result = build_column(
+        column_name=column_name, metadata=metadata, VALID_DATE_FORMAT=VALID_DATE_FORMAT
+    )
 
     assert isinstance(result, Columns_Contract)
     assert result.column_name == "name"
@@ -232,3 +239,40 @@ def test_build_column():
     assert result.rules == {"max": 5}
     assert isinstance(result.transformations, list)
     assert result.transformations == ["strip"]
+
+
+def test_build_column_type_date():
+    metadata = {
+        "type": "date",
+        "date_format": "DD-MM-YYYY",
+        "required": True,
+        "nullable": False,
+        "unique": False,
+        "rules": {"allowed_values": ["05-01-2000", "06-01-2000"]},
+        "transformations": [],
+    }
+    column_name = "invoice_date"
+    result = build_column(
+        column_name=column_name, metadata=metadata, VALID_DATE_FORMAT=VALID_DATE_FORMAT
+    )
+
+    assert result.column_type == "date"
+    assert result.date_format == "%d-%m-%Y"
+    assert result.rules == {"allowed_values": [date(2000, 1, 5), date(2000, 1, 6)]}
+
+
+@pytest.mark.parametrize(
+    "metadata, column_name",
+    [
+        ({"type": "date", "date_format": "YYY-mm-dd"}, "invoice_date"),
+        ({"type": "date", "date_format": "yyyy-mm-dd"}, "invoice_date"),
+        ({"type": "date", "date_format": "%Y-%m-%d"}, "invoice_date"),
+    ],
+)
+def test_build_column_invalid_date(metadata, column_name):
+    with pytest.raises(YAMLContractError):
+        build_column(
+            metadata=metadata,
+            column_name=column_name,
+            VALID_DATE_FORMAT=VALID_DATE_FORMAT,
+        )

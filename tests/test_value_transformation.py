@@ -1,5 +1,6 @@
 import pytest
 from email_validator import validate_email, EmailNotValidError
+from datetime import date
 from decimal import Decimal, DecimalException
 from data_contract_cli.value_transformations import (
     convert_str_to_int,
@@ -13,6 +14,14 @@ from data_contract_cli.value_transformations import (
     remove_accents,
     apply_string_transformations,
     collapse_spaces,
+    apply_max_length_rule,
+    apply_min_length_rule,
+    apply_regex_rule,
+    apply_starts_with_rule,
+    apply_ends_with_rule,
+    apply_min_rule,
+    apply_max_rule,
+    apply_allowed_values_rule,
 )
 
 
@@ -131,28 +140,40 @@ def test_raises_validate_email_value(invalid_mail):
 @pytest.mark.parametrize(
     "valid_date, date_format, expected",
     [
-        ("20/10/2010 ", "%d/%m/%Y", "20/10/2010"),
-        ("2010/10/20", "%Y/%m/%d", "2010/10/20"),
-        (" 20-10-2010", "%d-%m-%Y", "20-10-2010"),
-        ("2010-10-20", "%Y-%m-%d", "2010-10-20"),
+        ("20/10/2010 ", "%d/%m/%Y", None),
+        ("2010/10/20", "%Y/%m/%d", None),
+        (" 20-10-2010", "%d-%m-%Y", None),
+        ("2010-10-20", "%Y-%m-%d", None),
     ],
 )
-def test_validate_date_returns_string(valid_date, date_format, expected):
+def test_validate_date_returns_None(valid_date, date_format, expected):
     result = validate_date(valid_date, date_format)
     assert result == expected
 
 
 @pytest.mark.parametrize(
-    "invalid_date, date_format",
+    "invalid_date, date_format, expected",
     [
-        ("12/06", "%d/%m/%Y"),
-        ("12_06/2020", "%d/%m/%Y"),
-        ("31/02/2005", "%d/%m/%Y"),
+        (
+            "12/06",
+            "%d/%m/%Y",
+            "Date '12/06' is invalid or does not match the expected format '%d/%m/%Y'.",
+        ),
+        (
+            "12_06/2020",
+            "%d/%m/%Y",
+            "Date '12_06/2020' is invalid or does not match the expected format '%d/%m/%Y'.",
+        ),
+        (
+            "31/02/2005",
+            "%d/%m/%Y",
+            "Date '31/02/2005' is invalid or does not match the expected format '%d/%m/%Y'.",
+        ),
     ],
 )
-def test_raises_validate_date(invalid_date, date_format):
-    with pytest.raises(ValueError):
-        validate_date(invalid_date, date_format)
+def test_raises_validate_date(invalid_date, date_format, expected):
+    result = validate_date(invalid_date, date_format)
+    assert result == expected
 
 
 # Test functions apply transformations.
@@ -217,3 +238,141 @@ def test_apply_string_transformations(value, transformation, expected):
 
 
 # Test functions apply rules.
+@pytest.mark.parametrize(
+    "value, max_length, expected",
+    [
+        ("test", 5, None),
+        (
+            "test",
+            3,
+            f"length of value: (test) is: '4', lenght max autorized is: 3",
+        ),
+        ("test", 4, None),
+    ],
+)
+def test_apply_max_length_rule(value, max_length, expected):
+    result = apply_max_length_rule(value, max_length)
+    assert result == expected
+
+
+@pytest.mark.parametrize(
+    "value, min_length, expected",
+    [
+        ("test", 3, None),
+        (
+            "test",
+            5,
+            f"length of value: (test) is: '4', lenght min autorized is: 5",
+        ),
+        ("test", 4, None),
+    ],
+)
+def test_apply_min_length_rule(value, min_length, expected):
+    result = apply_min_length_rule(value, min_length)
+    assert result == expected
+
+
+def test_apply_regex_rule():
+    invoice_pattern = r"^INV-\d{3}$"
+    content = "INV-001"
+    result = apply_regex_rule(value=content, regex=invoice_pattern)
+    assert result is None
+
+
+def test_apply_regex_rule_invalid_case():
+    invoice_pattern = r"^INV-\d{3}$"
+    content = "invoice-001"
+    result = apply_regex_rule(value=content, regex=invoice_pattern)
+    assert isinstance(result, str)
+
+
+@pytest.mark.parametrize(
+    "value, start_whith, expected",
+    [
+        ("INV-001", "INV-0", None),
+        (
+            "INv -001",
+            "INV-0",
+            f"Value 'INv -001' does not match startwith pattern 'INV-0'.",
+        ),
+        ("INV", "INV-0", f"Value 'INV' does not match startwith pattern 'INV-0'."),
+    ],
+)
+def test_apply_starts_with_rule(value, start_whith, expected):
+    result = apply_starts_with_rule(value, start_whith)
+    assert result == expected
+
+
+@pytest.mark.parametrize(
+    "value, ends_whith, expected",
+    [
+        ("test@gmail.com", "gmail.com", None),
+        (
+            "test@gmail.fr",
+            "gmail.com",
+            f"Value 'test@gmail.fr' does not match startwith pattern 'gmail.com'.",
+        ),
+        (
+            "test@gmail.Com",
+            "gmail.com",
+            f"Value 'test@gmail.Com' does not match startwith pattern 'gmail.com'.",
+        ),
+    ],
+)
+def test_apply_ends_with_rule(value, ends_whith, expected):
+    result = apply_ends_with_rule(value, ends_whith)
+    assert result == expected
+
+
+@pytest.mark.parametrize(
+    "value,min_valid_value, expected",
+    [
+        (5, 5, None),
+        (5, 6, f"Value: '5' is under the minimum autorized: '6'"),
+        (5, 4, None),
+        (-15, 4, f"Value: '-15' is under the minimum autorized: '4'"),
+    ],
+)
+def test_apply_min_rules(value, min_valid_value, expected):
+    result = apply_min_rule(value, min_valid_value)
+    assert result == expected
+
+
+@pytest.mark.parametrize(
+    "value, max_valid_value, expected",
+    [
+        (5, 5, None),
+        (6, 5, f"Value: '6' exceeds the maximum autorized: '5'"),
+        (4, 5, None),
+        (-6, 5, None),
+    ],
+)
+def test_apply_max_rules(value, max_valid_value, expected):
+    result = apply_max_rule(value, max_valid_value)
+    assert result == expected
+
+
+@pytest.mark.parametrize(
+    "value, allowed_values, date_format, expected",
+    [
+        ("10/05/1995", [date(1995, 5, 10), date(1996, 5, 10)], "%d/%m/%Y", None),
+        (
+            "10/05/1994",
+            [date(1995, 5, 10), date(1996, 5, 10)],
+            "%d/%m/%Y",
+            f"Value '10/05/1994' is not among the allowed values: ['10/05/1995', '10/05/1996'].",
+        ),
+        ("test", ["test", "Test1"], None, None),
+        (
+            "Test",
+            ["test", "Test1"],
+            None,
+            f"the value  'Test' not in allowed values: '['test', 'Test1']'",
+        ),
+        (1, [1, 2], None, None),
+        (-1, [1, 2], None, f"the value  '-1' not in allowed values: '[1, 2]'"),
+    ],
+)
+def test_apply_allowed_values_rule(value, allowed_values, date_format, expected):
+    result = apply_allowed_values_rule(value, allowed_values, date_format)
+    assert result == expected
