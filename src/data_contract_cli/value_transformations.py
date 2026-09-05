@@ -1,6 +1,7 @@
 from datetime import datetime, date
 from decimal import Decimal, ROUND_HALF_UP
 from email_validator import EmailNotValidError, validate_email
+from data_contract_cli.contract_models import Contract, Columns_Contract
 import unicodedata
 import re
 
@@ -23,7 +24,7 @@ def convert_str_to_bool(value: str) -> bool:
     elif value.strip().lower() in ("false", "0", "n", "no"):
         return False
     else:
-        raise ValueError(f"Cannot convert '{value}' to boolean.")
+        raise ValueError
 
 
 def validate_str(value) -> None:
@@ -31,7 +32,7 @@ def validate_str(value) -> None:
     if isinstance(value, str):
         return
     else:
-        raise ValueError(f"value: '{value}' is not a string.")
+        raise TypeError(f"value: '{value}' is not a string.")
 
 
 def validate_email_value(mail: str) -> str:
@@ -48,7 +49,7 @@ def validate_date(row_date: str, date_format: str) -> None | str:
     """Validate that a date string matches the expected format."""
     try:
         parsed_date = datetime.strptime(row_date.strip(), date_format).date()
-    except ValueError as e:
+    except (ValueError, TypeError):
         return (
             f"Date '{row_date}' is invalid or does not match "
             f"the expected format '{date_format}'."
@@ -117,6 +118,56 @@ def apply_string_transformations(transformations: list, value: str) -> str:
         value = remove_accents(value)
 
     return value
+
+
+# Functions apply rules.
+def apply_max_length_rule(value: str, max_length_rules: int) -> str | None:
+    """Return an error message if the value exceeds the maximum length."""
+    if len(value) > max_length_rules:
+        return f"length of value: ({value}) is: '{len(value)}', lenght max autorized is: {max_length_rules}"
+    return None
+
+
+def apply_min_length_rule(value: str, min_length_rules: int) -> str | None:
+    """Return an error message if the value is under the minimum length."""
+    if len(value) < min_length_rules:
+        return f"length of value: ({value}) is: '{len(value)}', lenght min autorized is: {min_length_rules}"
+    return None
+
+
+def apply_regex_rule(value: str, regex: str) -> str | None:
+    """Return an error message if the value unmatch with regex pattern."""
+    if re.fullmatch(regex, value) is None:
+        return f"Value '{value}' does not match regex pattern '{regex}'."
+    return None
+
+
+def apply_starts_with_rule(value: str, startwith: str) -> str | None:
+    """Return an error message if the value unmatch with startwith pattern."""
+    if not value.startswith(startwith):
+        return f"Value '{value}' does not match startwith pattern '{startwith}'."
+    return None
+
+
+def apply_ends_with_rule(value: str, ends_with: str) -> str | None:
+    """Return an error message if the value unmatch with endswith pattern."""
+    if not value.endswith(ends_with):
+        return f"Value '{value}' does not match endswith pattern '{ends_with}'."
+    return None
+
+
+def apply_min_rule(value: int, min_valid_value: int) -> str | None:
+    """Return an error message if the value is under the minimal valid value."""
+    if value < min_valid_value:
+        return f"Value: '{value}' is under the minimum autorized: '{min_valid_value}'"
+    return None
+
+
+def apply_max_rule(value: int, max_valid_value: int) -> str | None:
+    """Return an error message if the value is exceeds the maximal valid value."""
+    if value > max_valid_value:
+        return f"Value: '{value}' exceeds the maximum autorized: '{max_valid_value}'"
+    return None
 
 
 type value = str | int | Decimal | bool
