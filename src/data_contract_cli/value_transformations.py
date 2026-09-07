@@ -6,7 +6,6 @@ import unicodedata
 import re
 
 
-# Value conversion and validation functions.
 def convert_str_to_int(value: str) -> int:
     """Convert a string value to an integer."""
     return int(value.strip())
@@ -57,7 +56,6 @@ def validate_date(row_date: str, date_format: str) -> None | str:
     return
 
 
-# Functions apply transformations.
 def remove_accents(value: str) -> str:
     """Remove accents from a string value."""
     split_value = unicodedata.normalize("NFD", value)
@@ -97,30 +95,6 @@ def normalize_date(row_date: str, date_format: str) -> str:
     return str(parsed_date.isoformat())
 
 
-def apply_string_transformations(transformations: list, value: str) -> str:
-    """Apply the configured transformations to a string value."""
-    if "strip" in transformations:
-        value = value.strip()
-
-    if "lower" in transformations:
-        value = value.lower()
-
-    if "upper" in transformations:
-        value = value.upper()
-
-    if "title" in transformations:
-        value = value.title()
-
-    if "collapse_spaces" in transformations:
-        value = collapse_spaces(value)
-
-    if "remove_accents" in transformations:
-        value = remove_accents(value)
-
-    return value
-
-
-# Functions apply rules.
 def apply_max_length_rule(value: str, max_length_rules: int) -> str | None:
     """Return an error message if the value exceeds the maximum length."""
     if len(value) > max_length_rules:
@@ -192,3 +166,56 @@ def apply_allowed_values_rule(
         return f"the value  '{value}' not in allowed values: '{allowed_values}'"
 
     return None
+
+
+def apply_string_transformations(transformations: list, value: str) -> str:
+    """Apply the configured transformations to a string value."""
+    if "strip" in transformations:
+        value = value.strip()
+
+    if "lower" in transformations:
+        value = value.lower()
+
+    if "upper" in transformations:
+        value = value.upper()
+
+    if "title" in transformations:
+        value = value.title()
+
+    if "collapse_spaces" in transformations:
+        value = collapse_spaces(value)
+
+    if "remove_accents" in transformations:
+        value = remove_accents(value)
+
+    return value
+
+
+def process_value(column: Columns_Contract, value: str) -> value:
+    """Convert or validate a value according to the column type."""
+    converted_value = None
+    if column.column_type == "str":
+        validate_str(value)
+
+    elif column.column_type == "int":
+        converted_value = convert_str_to_int(value)
+
+    elif column.column_type == "decimal":
+        converted_value = convert_str_to_decimal(value)
+
+    elif column.column_type == "bool":
+        converted_value = convert_str_to_bool(value)
+
+    elif column.column_type == "email":
+        validate_email_value(value)
+
+    elif column.column_type == "date" and column.date_format:
+        validated_date = validate_date(row_date=value, date_format=column.date_format)
+        if isinstance(validated_date, str):
+            raise ValueError(validated_date)
+
+    if converted_value is not None:
+        return converted_value
+
+    else:
+        return value

@@ -48,7 +48,7 @@ def test_normalize_transformation():
 @pytest.mark.parametrize(
     "valid_transformation, valid_type",
     [
-        (["upper", "title", "collapse_spaces", "remove_accent"], "str"),
+        (["upper", "title", "collapse_spaces", "remove_accents"], "str"),
         (["strip", "lower"], "str"),
         (["strip", "lower"], "email"),
         (["format_decimal"], ("decimal")),

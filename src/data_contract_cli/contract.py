@@ -23,7 +23,7 @@ TRANSFORMATION = [
     "upper",
     "title",
     "collapse_spaces",
-    "remove_accent",
+    "remove_accents",
     "format_decimal",
     "normalize_date",
 ]
@@ -325,20 +325,15 @@ def validate_allowed_values(
 
 
 def convert_dates_in_allowed_values(allowed_values: list, date_format: str) -> list:
-    """Convert date strings in allowed values to date objects."""
     cleaned_allowed_values = []
-    for date_value in allowed_values:
-        if isinstance(date_value, date):
-            cleaned_allowed_values.append(date_value)
-            continue
-
+    for date in allowed_values:
         try:
-            date_value = datetime.strptime(date_value, date_format).date()
-        except (TypeError, ValueError):
+            value = datetime.strptime(date, date_format).date()
+        except ValueError:
             raise YAMLContractError(
-                f"Values in 'allowed_values' must be valid dates matching the format '{date_format}'."
+                f"values in rules: 'allowed values' unmatch the date format."
             )
-        cleaned_allowed_values.append(date_value)
+        cleaned_allowed_values.append(value)
     return cleaned_allowed_values
 
 
@@ -511,7 +506,7 @@ def build_contract(contract: dict) -> Contract:
 def build_column(
     column_name: str, metadata: dict, VALID_DATE_FORMAT: dict
 ) -> Columns_Contract:
-    """Build a Columns_Contract object from validated column metadata."""
+    """Build a Column_Contract object from a loop of Contract object."""
     date_format = None
     column_name = column_name
     column_type = metadata["type"]
@@ -521,8 +516,7 @@ def build_column(
             date_format = VALID_DATE_FORMAT[metadata["date_format"]]
         except KeyError:
             raise YAMLContractError(
-                f"date_format: '{metadata.get('date_format')}' is not supported. "
-                f"Choose one of: {list(VALID_DATE_FORMAT.keys())}."
+                f"date_format: {metadata["date_format"]} isn't a valid format for date, please choices between '{VALID_DATE_FORMAT.keys()}'."
             )
         if metadata["rules"].get("allowed_values") is not None:
 

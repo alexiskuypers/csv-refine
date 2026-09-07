@@ -2,6 +2,7 @@ import pytest
 from email_validator import validate_email, EmailNotValidError
 from datetime import date
 from decimal import Decimal, DecimalException
+from data_contract_cli.contract_models import Columns_Contract
 from data_contract_cli.value_transformations import (
     convert_str_to_int,
     convert_str_to_decimal,
@@ -22,10 +23,10 @@ from data_contract_cli.value_transformations import (
     apply_min_rule,
     apply_max_rule,
     apply_allowed_values_rule,
+    process_value,
 )
 
 
-# Test Value conversion and validation functions.
 @pytest.mark.parametrize(
     "valid_values, expected",
     [
@@ -118,7 +119,7 @@ def test_validate_str_accepts_str():
 
 @pytest.mark.parametrize("invalid_values", [1, True, 15.4, ["5"]])
 def test_raises_validate_str(invalid_values):
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         validate_str(invalid_values)
 
 
@@ -176,7 +177,6 @@ def test_raises_validate_date(invalid_date, date_format, expected):
     assert result == expected
 
 
-# Test functions apply transformations.
 @pytest.mark.parametrize(
     "valid_date, date_format, expected",
     [
@@ -220,24 +220,6 @@ def test_collapse_spaces():
     assert result == " test , te st "
 
 
-@pytest.mark.parametrize(
-    "value, transformation, expected",
-    [
-        (" test ", "strip", "test"),
-        ("TEsT", "lower", "test"),
-        ("tesT", "upper", "TEST"),
-        ("teST TeST", "title", "Test Test"),
-        ("  test  tes t  ", "collapse_spaces", " test tes t "),
-        ("élodie$", "remove_accents", "elodie$"),
-        (" tES t ", "strip, lower, collapse_spaces", "tes t"),
-    ],
-)
-def test_apply_string_transformations(value, transformation, expected):
-    result = apply_string_transformations(value=value, transformations=transformation)
-    assert result == expected
-
-
-# Test functions apply rules.
 @pytest.mark.parametrize(
     "value, max_length, expected",
     [
@@ -310,12 +292,12 @@ def test_apply_starts_with_rule(value, start_whith, expected):
         (
             "test@gmail.fr",
             "gmail.com",
-            f"Value 'test@gmail.fr' does not match startwith pattern 'gmail.com'.",
+            f"Value 'test@gmail.fr' does not match endswith pattern 'gmail.com'.",
         ),
         (
             "test@gmail.Com",
             "gmail.com",
-            f"Value 'test@gmail.Com' does not match startwith pattern 'gmail.com'.",
+            f"Value 'test@gmail.Com' does not match endswith pattern 'gmail.com'.",
         ),
     ],
 )
@@ -376,3 +358,73 @@ def test_apply_max_rules(value, max_valid_value, expected):
 def test_apply_allowed_values_rule(value, allowed_values, date_format, expected):
     result = apply_allowed_values_rule(value, allowed_values, date_format)
     assert result == expected
+
+
+@pytest.mark.parametrize(
+    "value, transformation, expected",
+    [
+        (" test ", "strip", "test"),
+        ("TEsT", "lower", "test"),
+        ("tesT", "upper", "TEST"),
+        ("teST TeST", "title", "Test Test"),
+        ("  test  tes t  ", "collapse_spaces", " test tes t "),
+        ("élodie$", "remove_accents", "elodie$"),
+        (" tES t ", "strip, lower, collapse_spaces", "tes t"),
+    ],
+)
+def test_apply_string_transformations(value, transformation, expected):
+    result = apply_string_transformations(value=value, transformations=transformation)
+    assert result == expected
+
+
+@pytest.mark.parametrize(
+    "column_type, value, expected",
+    [
+        ("str", "test", "test"),
+        ("int", "5", 5),
+        ("decimal", "5.54", format_decimal(Decimal(5.54))),
+        ("bool", "True", True),
+        ("email", "test@gmail.com", "test@gmail.com"),
+        ("date", "04-05-1996", "04-05-1996"),
+    ],
+)
+def test_process_value_valid_case(column_type, value, expected):
+    if column_type == "date":
+        date_format = "%d-%m-%Y"
+    else:
+        date_format = None
+
+    column = Columns_Contract(
+        column_name="test",
+        column_type=column_type,
+        date_format=date_format,
+    )
+
+    result = process_value(column=column, value=value)
+    assert result == expected
+
+
+@pytest.mark.parametrize(
+    "column_type, value",
+    [
+        ("str", True),
+        ("int", "abc"),
+        ("decimal", "5a"),
+        ("bool", "t"),
+        ("email", "test@@gmail"),
+        ("date", "04:05:1996"),
+    ],
+)
+def test_process_value_invalid_case(column_type, value):
+    if column_type == "date":
+        date_format = "%d-%m-%Y"
+    else:
+        date_format = None
+
+    column = Columns_Contract(
+        column_name="test",
+        column_type=column_type,
+        date_format=date_format,
+    )
+    with pytest.raises((TypeError, ValueError, DecimalException, EmailNotValidError)):
+        process_value(column=column, value=value)
