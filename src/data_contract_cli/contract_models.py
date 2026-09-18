@@ -14,7 +14,6 @@ class Columns_Contract:
         column_name: str,
         column_type: str,
         date_format: str | None = None,
-        required: bool = False,
         nullable: bool = False,
         unique: bool = False,
         rules: dict = {},
@@ -22,7 +21,6 @@ class Columns_Contract:
     ) -> None:
         self.column_name = column_name
         self.column_type = column_type
-        self.required = required
         self.nullable = nullable
         self.unique = unique
         self.rules = rules
@@ -35,7 +33,6 @@ class Columns_Contract:
             return (
                 f"\ncolumn_name: '{self.column_name}',\n"
                 f"column_type: '{self.column_type}', \n"
-                f"required: {self.required},\n"
                 f"nullable: {self.nullable}, \n"
                 f"unique: {self.unique}, \n"
                 f"rules : {self.rules}\n"
@@ -47,7 +44,6 @@ class Columns_Contract:
                 f"\ncolumn_name: '{self.column_name}',\n"
                 f"column_type: '{self.column_type}', \n"
                 f"date_format: '{self.date_format}', \n"
-                f"required: {self.required},\n"
                 f"nullable: {self.nullable}, \n"
                 f"unique: {self.unique}, \n"
                 f"rules : {self.rules}\n"

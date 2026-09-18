@@ -156,13 +156,6 @@ def validate_type(metadata: dict) -> str:
 
 def validate_column_flags(metadata: dict) -> dict:
     """Validate and add default values for column flags."""
-    if "required" not in metadata:
-        metadata["required"] = False
-
-    else:
-        if not isinstance(metadata["required"], bool):
-            raise YAMLContractError("The 'required' flag must be a boolean.")
-
     if "nullable" not in metadata:
         metadata["nullable"] = False
 
@@ -526,7 +519,6 @@ def build_column(
             )
             metadata["rules"]["allowed_values"] = normalize_allowed_values
 
-    required = metadata["required"]
     nullable = metadata["nullable"]
     unique = metadata["unique"]
     rules = metadata["rules"]
@@ -536,7 +528,6 @@ def build_column(
         column_name=column_name,
         column_type=column_type,
         date_format=date_format,
-        required=required,
         nullable=nullable,
         unique=unique,
         rules=rules,

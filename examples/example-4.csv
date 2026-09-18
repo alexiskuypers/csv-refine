@@ -1,0 +1,7 @@
+﻿invoice_id,customer_name,email,quantity,amount,invoice_date,paid,status
+INV-001  ,2,alice.martin@gmail.com,3,1200.5045,05-01-2004,false,paid
+     ,Bernard   Louis,bernard.louis@outlook.com,2,450.00,05-01-2000,false,pending
+INV-003,chloé   dubois,chloe.dubois@yahoo.com,12,89.9045,05-01-2000,true,paid
+INV-004,David Leroy,david.leroy@proton.me,1,240.00,06-01-2000,false,cancelled
+INV-005,Élodie laurent,elodie.laurent@gmail.com,100,2500.756,07-01-2000,true,pending
+INV-006,Félix Noël,felix.noel@outlook.com,7,315.75,05-01-2000,true,paid

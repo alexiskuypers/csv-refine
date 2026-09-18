@@ -75,25 +75,21 @@ def unique_contract() -> Contract:
             "invoice_id": Columns_Contract(
                 column_name="invoice_id",
                 column_type="str",
-                required=True,
                 unique=True,
             ),
             "customer_name": Columns_Contract(
                 column_name="customer_name",
                 column_type="str",
-                required=True,
                 unique=False,
             ),
             "email": Columns_Contract(
                 column_name="email",
                 column_type="email",
-                required=True,
                 unique=True,
             ),
             "quantity": Columns_Contract(
                 column_name="quantity",
                 column_type="int",
-                required=True,
                 unique=False,
             ),
         },

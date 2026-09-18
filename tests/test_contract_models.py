@@ -11,7 +11,6 @@ def test_contract_object_with_date():
         column_name="invoice_date",
         column_type="date",
         date_format="%Y-%m-%d",
-        required=True,
         nullable=False,
         unique=False,
         rules={},
@@ -38,7 +37,6 @@ def test_contract_object():
     column = Columns_Contract(
         column_name="id",
         column_type="str",
-        required=True,
         nullable=False,
         unique=False,
         rules={},
@@ -60,7 +58,6 @@ def test_columns_contract_object():
     column = Columns_Contract(
         column_name="id",
         column_type="str",
-        required=True,
         nullable=False,
         unique=False,
         rules={},
@@ -68,7 +65,6 @@ def test_columns_contract_object():
     )
     assert column.column_name == "id"
     assert column.column_type == "str"
-    assert column.required is True
     assert column.nullable is False
     assert column.unique is False
     assert column.rules == {}
@@ -80,7 +76,6 @@ def test_columns_contract_object_type_date():
         column_name="invoice_date",
         column_type="date",
         date_format="%Y-%m-%d",
-        required=True,
         nullable=False,
         unique=False,
         rules={},
@@ -89,7 +84,6 @@ def test_columns_contract_object_type_date():
     assert column.column_name == "invoice_date"
     assert column.column_type == "date"
     assert column.date_format == "%Y-%m-%d"
-    assert column.required is True
     assert column.nullable is False
     assert column.unique is False
     assert column.rules == {}
@@ -114,7 +108,6 @@ def test_validate_date_format(
         column_name="invoice_date",
         column_type="date",
         date_format=date_format,
-        required=True,
         nullable=False,
         unique=False,
         rules={},

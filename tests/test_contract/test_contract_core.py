@@ -125,25 +125,23 @@ def test_validate_column_flags_empty():
     result = validate_column_flags(empty_metadata)
     assert result == {
         "type": "str",
-        "required": False,
         "unique": False,
         "nullable": False,
     }
 
 
 def test_validate_column_flags_valid_case():
-    metadata = {"type": "str", "required": False, "unique": True, "nullable": False}
+    metadata = {"type": "str", "unique": True, "nullable": False}
     result = validate_column_flags(metadata)
     assert result == {
         "type": "str",
-        "required": False,
         "unique": True,
         "nullable": False,
     }
 
 
 def test_validate_column_flags_invalid_case():
-    metadata = {"type": "str", "required": "False", "unique": True, "nullable": False}
+    metadata = {"type": "str", "unique": 4, "nullable": False}
     with pytest.raises(YAMLContractError):
         validate_column_flags(metadata)
 
@@ -190,7 +188,6 @@ def test_build_contract_object():
         "encoding": "utf-8-sig",
         "invoice_id": {
             "type": "str",
-            "required": True,
             "nullable": False,
             "unique": True,
             "rules": {"starts_with": "INV-"},
@@ -198,7 +195,6 @@ def test_build_contract_object():
         },
         "customer_name": {
             "type": "str",
-            "required": True,
             "nullable": False,
             "unique": False,
             "rules": {},
@@ -218,7 +214,6 @@ def test_build_contract_object():
 def test_build_column():
     metadata = {
         "type": "str",
-        "required": True,
         "nullable": False,
         "unique": False,
         "rules": {"max": 5},
@@ -231,7 +226,6 @@ def test_build_column():
 
     assert isinstance(result, Columns_Contract)
     assert result.column_name == "name"
-    assert result.required is True
     assert result.column_type == "str"
     assert result.unique is False
     assert result.nullable is False
@@ -245,7 +239,6 @@ def test_build_column_type_date():
     metadata = {
         "type": "date",
         "date_format": "DD-MM-YYYY",
-        "required": True,
         "nullable": False,
         "unique": False,
         "rules": {"allowed_values": ["05-01-2000", "06-01-2000"]},

@@ -9,13 +9,11 @@ def valid_contract() -> Contract:
     invoice_id = Columns_Contract(
         column_name="invoice_id",
         column_type="int",
-        required=True,
         unique=True,
     )
     name = Columns_Contract(
         column_name="name",
         column_type="str",
-        required=True,
         unique=True,
     )
 

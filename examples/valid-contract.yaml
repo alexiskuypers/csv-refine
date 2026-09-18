@@ -1,32 +1,29 @@
 # YAML contract
 
 
-delimiter: ";"
+delimiter: ","
 encoding: utf-8-sig
 
 columns:
   invoice_id:
     type: str
-    required: true
     nullable: false
     unique: true
-    rules: {starts_with: "INV-"}
-    transformations: [strip, upper]
+    rules: {}
+    transformations: [upper]
 
 
   customer_name:
     type: str
-    required: true
     nullable: false
-    unique: false
+    unique: true
     rules: {}
-    transformations: [strip, collapse_spaces, title]
+    transformations: [strip, collapse_spaces, remove_accents, title]
 
 
   email:
     type: email
-    required: true
-    nullable: false
+    nullable: true
     unique: false
     rules: {}
     transformations: [strip, lower]
@@ -34,17 +31,15 @@ columns:
 
   quantity:
     type: int
-    required: true
-    nullable: false
+    nullable: true
     unique: false
-    rules: {min: 1, max: 100}
+    rules: {}
     transformations: []
 
 
   amount:
     type: decimal
-    required: true
-    nullable: false
+    nullable: true
     unique: false
     rules: {min: 1, max: 2500}
     transformations: [format_decimal]
@@ -52,8 +47,8 @@ columns:
 
   invoice_date:
     type: date
-    required: true
-    nullable: false
+    date_format: "DD-MM-YYYY"
+    nullable: true
     unique: false
     rules: {}
     transformations: [normalize_date]
@@ -61,8 +56,7 @@ columns:
 
   paid:
     type: bool
-    required: true
-    nullable: false
+    nullable: true
     unique: false
     rules: {}
     transformations: []
@@ -70,9 +64,9 @@ columns:
 
   status:
     type: str
-    required: true
-    nullable: false
+    nullable: true
     unique: false
-    rules: {allowed_values: [paid, pending, cancelled]}
+    rules: {}
     transformations: [strip, lower]
+
 
