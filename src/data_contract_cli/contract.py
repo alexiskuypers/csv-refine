@@ -1,5 +1,10 @@
 from data_contract_cli.exceptions import ApplicationError, YAMLContractError
-from data_contract_cli.contract_models import Contract, Columns_Contract
+from data_contract_cli.contract_models import (
+    Contract,
+    Columns_Contract,
+    VALID_DATE_FORMAT,
+)
+from datetime import date, datetime
 from pathlib import Path
 from decimal import Decimal, InvalidOperation
 import logging, re, yaml
@@ -18,7 +23,7 @@ TRANSFORMATION = [
     "upper",
     "title",
     "collapse_spaces",
-    "remove_accent",
+    "remove_accents",
     "format_decimal",
     "normalize_date",
 ]
@@ -151,13 +156,6 @@ def validate_type(metadata: dict) -> str:
 
 def validate_column_flags(metadata: dict) -> dict:
     """Validate and add default values for column flags."""
-    if "required" not in metadata:
-        metadata["required"] = False
-
-    else:
-        if not isinstance(metadata["required"], bool):
-            raise YAMLContractError("The 'required' flag must be a boolean.")
-
     if "nullable" not in metadata:
         metadata["nullable"] = False
 
@@ -280,7 +278,10 @@ def validate_regex(rules: dict) -> None:
             raise YAMLContractError(f"invalid regex: {rule_value}")
 
 
-def validate_allowed_values(rules: dict, column_type: str) -> None:
+def validate_allowed_values(
+    rules: dict,
+    column_type: str,
+) -> None:
     """Validate that allowed values match the declared column type."""
     for rule_name, allowed_values in rules.items():
         if not rule_name == "allowed_values":
@@ -291,7 +292,7 @@ def validate_allowed_values(rules: dict, column_type: str) -> None:
 
         for item in allowed_values:
 
-            if column_type in ("str", "email", "date"):
+            if column_type in ("str", "email"):
                 if not isinstance(item, str):
                     raise YAMLContractError(
                         f"column type: {column_type} and type in allowed values need to be same."
@@ -314,6 +315,19 @@ def validate_allowed_values(rules: dict, column_type: str) -> None:
                     raise YAMLContractError(
                         f"column type: {column_type} and type in allowed values need to be same."
                     )
+
+
+def convert_dates_in_allowed_values(allowed_values: list, date_format: str) -> list:
+    cleaned_allowed_values = []
+    for date in allowed_values:
+        try:
+            value = datetime.strptime(date, date_format).date()
+        except ValueError:
+            raise YAMLContractError(
+                f"values in rules: 'allowed values' unmatch the date format."
+            )
+        cleaned_allowed_values.append(value)
+    return cleaned_allowed_values
 
 
 def verify_rules_type(normalized_rules: dict, column_type: str) -> None:
@@ -467,7 +481,9 @@ def build_contract(contract: dict) -> Contract:
             encoding = metadata
 
         else:
-            column_object = build_column(key, metadata)
+            column_object = build_column(
+                key, metadata, VALID_DATE_FORMAT=VALID_DATE_FORMAT
+            )
             headers.append(column_object.column_name)
             columns[key] = column_object
 
@@ -480,11 +496,29 @@ def build_contract(contract: dict) -> Contract:
     return contract_object
 
 
-def build_column(column_name: str, metadata: dict) -> Columns_Contract:
+def build_column(
+    column_name: str, metadata: dict, VALID_DATE_FORMAT: dict
+) -> Columns_Contract:
     """Build a Column_Contract object from a loop of Contract object."""
+    date_format = None
     column_name = column_name
     column_type = metadata["type"]
-    required = metadata["required"]
+
+    if column_type == "date":
+        try:
+            date_format = VALID_DATE_FORMAT[metadata["date_format"]]
+        except KeyError:
+            raise YAMLContractError(
+                f"date_format: {metadata["date_format"]} isn't a valid format for date, please choices between '{VALID_DATE_FORMAT.keys()}'."
+            )
+        if metadata["rules"].get("allowed_values") is not None:
+
+            allowed_values = metadata["rules"]["allowed_values"]
+            normalize_allowed_values = convert_dates_in_allowed_values(
+                allowed_values=allowed_values, date_format=date_format
+            )
+            metadata["rules"]["allowed_values"] = normalize_allowed_values
+
     nullable = metadata["nullable"]
     unique = metadata["unique"]
     rules = metadata["rules"]
@@ -493,13 +527,17 @@ def build_column(column_name: str, metadata: dict) -> Columns_Contract:
     column = Columns_Contract(
         column_name=column_name,
         column_type=column_type,
-        required=required,
+        date_format=date_format,
         nullable=nullable,
         unique=unique,
         rules=rules,
         transformations=transformations,
     )
-
+    if column_type == "date":
+        column.validate_date_format(
+            VALID_DATE_FORMAT=VALID_DATE_FORMAT,
+            raw_date_format=metadata["date_format"],
+        )
     return column
 
 

@@ -118,15 +118,15 @@ def load_and_validate_csv(
     validate_headers(raw_structure=raw_structure, contract=contract)
     raw_csv_rows = raw_structure["csv_rows"]
     is_rows_empty(raw_csv_rows)
-    valid_csv = separate_csv_rows(raw_csv_rows=raw_csv_rows, contract=contract)
+    classified_rows = separate_csv_rows(raw_csv_rows=raw_csv_rows, contract=contract)
 
-    if len(valid_csv["invalid_rows"]):
+    if len(classified_rows["invalid_rows"]):
         logger.warning(
             "CSV structural validation completed with invalid rows: "
             f"file: {path}, "
             f"total rows: {len(raw_csv_rows)}, "
-            f"valid rows: {len(valid_csv['valid_rows'])}, "
-            f"invalid rows: {len(valid_csv['invalid_rows'])} "
+            f"valid rows: {len(classified_rows['valid_rows'])}, "
+            f"invalid rows: {len(classified_rows['invalid_rows'])} "
         )
 
     else:
@@ -134,8 +134,8 @@ def load_and_validate_csv(
             "CSV structural validation completed successfully: "
             f"file: {path}, "
             f"total rows: {len(raw_csv_rows)}, "
-            f"valid rows: {len(valid_csv['valid_rows'])}, "
-            f"invalid rows: {len(valid_csv['invalid_rows'])} "
+            f"valid rows: {len(classified_rows['valid_rows'])}, "
+            f"invalid rows: {len(classified_rows['invalid_rows'])} "
         )
 
-    return valid_csv
+    return classified_rows

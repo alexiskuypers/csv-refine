@@ -47,6 +47,29 @@ CSV values are initially read as text and temporarily converted when required fo
 | `date`    | Valid calendar date              | `"14/06/2026"`         |
 | `email`   | String with a valid email format | `"client@example.com"` |
 
+### Date columns
+
+The `date` type validates that each non-empty value represents a real calendar date and matches the format declared in the contract.
+
+Every date column must define a `date_format`. This format must match the representation used in the source CSV and in the column's `allowed_values`, when this rule is configured.
+
+```yaml
+invoice_date:
+  type: date
+  date_format: "DD/MM/YYYY"
+  required: true
+  nullable: false
+  unique: false
+
+  rules:
+    allowed_values:
+      - "14/06/2026"
+      - "15/06/2026"
+
+  transformations:
+    - normalize_date
+```
+
 Supported date formats:
 
 ```text
@@ -56,11 +79,10 @@ YYYY/MM/DD
 DD-MM-YYYY
 ```
 
-Dates must exist in the calendar: `31/02/2026` is invalid.
+By default, a valid date keeps its original representation. When the `normalize_date` transformation is configured, the value is converted to the ISO `YYYY-MM-DD` format.
 
-The `date` type validates a value without changing its representation. Use the `normalize_date` transformation to convert it to `YYYY-MM-DD`.
+If date validation is not required, declare the column as `str`. Its values will then be treated as ordinary text without calendar or date-format validation.
 
-After validation, values are written back as text in the cleaned CSV file.
 
 ## Column options
 

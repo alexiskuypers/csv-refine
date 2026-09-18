@@ -113,7 +113,6 @@ def test_load_and_validate_contract(tmp_path):
             columns:
                 invoice_id:
                     type: str
-                    required: true
                     nullable: false
                     unique: true
                     rules: {starts_with: "INV-"}
@@ -121,7 +120,6 @@ def test_load_and_validate_contract(tmp_path):
 
                 customer_name:
                     type: str
-                    required: true
                     nullable: false
                     unique: false
                     rules: {}
@@ -138,7 +136,6 @@ def test_load_and_validate_contract(tmp_path):
     assert vars(result.columns["invoice_id"]) == {
         "column_name": "invoice_id",
         "column_type": "str",
-        "required": True,
         "nullable": False,
         "unique": True,
         "rules": {"starts_with": "INV-"},
@@ -147,7 +144,6 @@ def test_load_and_validate_contract(tmp_path):
     assert vars(result.columns["customer_name"]) == {
         "column_name": "customer_name",
         "column_type": "str",
-        "required": True,
         "nullable": False,
         "unique": False,
         "rules": {},
@@ -159,7 +155,6 @@ def test_load_and_validate_contract_invalid_case(tmp_path):
     content = dedent("""\
     customer_name:
       type: int
-      required: true
       nullable: false
       unique: false
       rules:

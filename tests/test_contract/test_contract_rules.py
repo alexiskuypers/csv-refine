@@ -1,5 +1,6 @@
 import pytest
 from decimal import Decimal
+from datetime import datetime, date
 
 
 from data_contract_cli.exceptions import ApplicationError, YAMLContractError
@@ -13,6 +14,7 @@ from data_contract_cli.contract import (
     verify_rules_type,
     validate_allowed_values,
     convert_rules_to_decimal,
+    convert_dates_in_allowed_values,
 )
 
 
@@ -215,3 +217,24 @@ def test_convert_rules_to_decimal_valid_case(raw_rules, expected_rules):
     result = convert_rules_to_decimal(raw_rules)
 
     assert result == expected_rules
+
+
+@pytest.mark.parametrize(
+    "date, date_format",
+    [
+        (["20/12/2000"], "%Y-%m-%d"),
+        (["20-12-2000"], "%Y/%m/%d"),
+        (["20/12/2000"], "%d-%m-%Y"),
+        (["20-12-2000", "20/12/2000"], "%d-%m-%Y"),
+    ],
+)
+def test_convert_date_in_allowed_values_invalid_case(date, date_format):
+    with pytest.raises(YAMLContractError):
+        convert_dates_in_allowed_values(date, date_format)
+
+
+def test_convert_date_in_allowed_values():
+    valid_date = ["20/12/2000", "20/12/2001"]
+    date_format = "%d/%m/%Y"
+    result = convert_dates_in_allowed_values(valid_date, date_format)
+    assert result == [date(2000, 12, 20), date(2001, 12, 20)]
