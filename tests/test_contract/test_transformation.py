@@ -1,8 +1,8 @@
 import pytest, yaml
 
 
-from data_contract_cli.exceptions import ApplicationError, YAMLContractError
-from data_contract_cli.contract import (
+from csv_refine.exceptions import ApplicationError, YAMLContractError
+from csv_refine.contract import (
     TRANSFORMATION,
     validate_contract_transformation,
     normalize_transformations,

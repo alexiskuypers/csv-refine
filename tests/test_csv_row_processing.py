@@ -1,8 +1,8 @@
 import pytest
 from decimal import Decimal
-from data_contract_cli.exceptions import CSVError
-from data_contract_cli.contract_models import Columns_Contract, Contract
-from data_contract_cli.row_processing import (
+from csv_refine.exceptions import CSVError
+from csv_refine.contract_models import Columns_Contract, Contract
+from csv_refine.row_processing import (
     apply_transformations,
     apply_rules,
     get_column_contract,

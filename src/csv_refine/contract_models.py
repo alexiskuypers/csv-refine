@@ -1,4 +1,4 @@
-from data_contract_cli.exceptions import YAMLContractError
+from csv_refine.exceptions import YAMLContractError
 
 VALID_DATE_FORMAT = {
     "DD-MM-YYYY": "%d-%m-%Y",

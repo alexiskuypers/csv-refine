@@ -1,6 +1,7 @@
+import pytest
 import logging
 from pathlib import Path
-from data_contract_cli.logging_config import configure_logging
+from csv_refine.logging_config import configure_logging
 
 
 def test_configure_logging(tmp_path, monkeypatch):

@@ -2,8 +2,8 @@ import pytest
 from email_validator import validate_email, EmailNotValidError
 from datetime import date
 from decimal import Decimal, DecimalException
-from data_contract_cli.contract_models import Columns_Contract
-from data_contract_cli.value_operation import (
+from csv_refine.contract_models import Columns_Contract
+from csv_refine.value_operation import (
     convert_str_to_int,
     convert_str_to_decimal,
     convert_str_to_bool,

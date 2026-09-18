@@ -1,7 +1,7 @@
 from datetime import datetime, date
 from decimal import Decimal, ROUND_HALF_UP
 from email_validator import EmailNotValidError, validate_email
-from data_contract_cli.contract_models import Contract, Columns_Contract
+from csv_refine.contract_models import Contract, Columns_Contract
 import unicodedata
 import re
 
