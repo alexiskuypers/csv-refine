@@ -5,6 +5,7 @@ from data_contract_cli.validate_unique import (
     group_errors_by_index,
     rebuild_classified_rows,
     validate_unique,
+    sort_invalid_rows_by_index,
 )
 from data_contract_cli.contract_models import Contract, Columns_Contract
 from data_contract_cli.validate_csv import get_invalid_rows
@@ -398,4 +399,94 @@ def test_validate_unique_strict_mode(cleaned_classified_rows, unique_contract):
         )
 
 
-### Test unique terminé
+def test_sort_invalid_rows_by_index():
+    data = {
+        "valid_rows": [
+            {
+                "index": 1,
+                "row": [
+                    "INV-001",
+                    "Clement Defre",
+                ],
+                "column_and_values": {
+                    "invoice_id": "INV-001",
+                    "customer_name": "Clement Defre",
+                },
+            },
+            {
+                "index": 3,
+                "row": [
+                    "INV-003",
+                    "Chloe Dubois",
+                ],
+                "column_and_values": {
+                    "invoice_id": "INV-003",
+                    "customer_name": "Chloe Dubois",
+                },
+            },
+        ],
+        "invalid_rows": [
+            {
+                "index": 5,
+                "row": [
+                    "",
+                    "Élodie laurent",
+                ],
+                "errors": ["Value at row 5, column 'invoice_id', cannot be null."],
+            },
+            {
+                "index": 3,
+                "row": [
+                    "INV-001",
+                    "Bernard Louis",
+                ],
+                "errors": ["Value: 'INV-001' in column: 'invoice_id' isn't unique."],
+            },
+            {
+                "index": 2,
+                "row": [
+                    "",
+                    "Jean Dupont",
+                ],
+                "errors": ["Value at row 5, column 'invoice_id', cannot be null."],
+            },
+        ],
+    }
+    result = sort_invalid_rows_by_index(data)
+    assert result == {
+        "valid_rows": [
+            {
+                "index": 1,
+                "row": ["INV-001", "Clement Defre"],
+                "column_and_values": {
+                    "invoice_id": "INV-001",
+                    "customer_name": "Clement Defre",
+                },
+            },
+            {
+                "index": 3,
+                "row": ["INV-003", "Chloe Dubois"],
+                "column_and_values": {
+                    "invoice_id": "INV-003",
+                    "customer_name": "Chloe Dubois",
+                },
+            },
+        ],
+        "invalid_rows": [
+            {
+                "index": 2,
+                "row": ["", "Jean Dupont"],
+                "errors": ["Value at row 5, column 'invoice_id', cannot be null."],
+            },
+            {
+                "index": 3,
+                "row": ["INV-001", "Bernard Louis"],
+                "errors": ["Value: 'INV-001' in column: 'invoice_id' isn't unique."],
+            },
+            {
+                "index": 5,
+                "row": ["", "\xc9lodie laurent"],
+                "errors": ["Value at row 5, column 'invoice_id', cannot be null."],
+            },
+        ],
+    }

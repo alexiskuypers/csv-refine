@@ -10,7 +10,7 @@ columns:
     nullable: false
     unique: true
     rules: {}
-    transformations: [upper]
+    transformations: [upper, strip]
 
 
   customer_name:

@@ -18,7 +18,7 @@ def orchestration(yaml_contract_path: Path, csv_path: Path, mode: str):
         mode=mode,
     )
 
-    return classified_rows
+    return validated_unique
 
 
 csv = Path("examples") / "example-4.csv"

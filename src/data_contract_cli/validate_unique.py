@@ -104,6 +104,14 @@ def rebuild_classified_rows(cleaned_classified_rows: dict, errors: list) -> dict
     return validated_classified_rows
 
 
+def sort_invalid_rows_by_index(validated_classified_rows: dict) -> dict:
+    """Sort invalid rows by index in place and return the updated dictionary."""
+    invalid_rows = validated_classified_rows["invalid_rows"]
+    invalid_rows = sorted(invalid_rows, key=lambda row: row["index"])
+    validated_classified_rows["invalid_rows"] = invalid_rows
+    return validated_classified_rows
+
+
 def validate_unique(
     contrat: Contract, cleaned_classified_rows: dict, mode: str
 ) -> dict:
@@ -135,8 +143,10 @@ def validate_unique(
     normalized_errors = normalized_errors_structure(duplicate_errors_by_column)
     cleaned_errors = group_errors_by_index(normalized_errors)
     validated_classified_rows = rebuild_classified_rows(
-        cleaned_classified_rows=cleaned_classified_rows, errors=cleaned_errors
+        cleaned_classified_rows=cleaned_classified_rows,
+        errors=cleaned_errors,
     )
+    validated_classified_rows = sort_invalid_rows_by_index(validated_classified_rows)
     logger.warning(
         f"Uniqueness validation completed with duplicates. "
         f"Errors: {duplicate_errors_by_column}. "
