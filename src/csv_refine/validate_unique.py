@@ -1,9 +1,9 @@
 import logging
 
-from data_contract_cli.contract_models import Contract, Columns_Contract
-from data_contract_cli.exceptions import CSVError
-from data_contract_cli.validate_csv import get_invalid_rows
-from data_contract_cli.row_processing import get_column_contract
+from csv_refine.contract_models import Contract, Columns_Contract
+from csv_refine.exceptions import CSVError
+from csv_refine.validate_csv import get_invalid_rows
+from csv_refine.row_processing import get_column_contract
 
 logger = logging.getLogger(__name__)
 

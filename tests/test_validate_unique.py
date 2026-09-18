@@ -1,5 +1,5 @@
 import pytest
-from data_contract_cli.validate_unique import (
+from csv_refine.validate_unique import (
     apply_unique_constraints,
     normalized_errors_structure,
     group_errors_by_index,
@@ -7,9 +7,9 @@ from data_contract_cli.validate_unique import (
     validate_unique,
     sort_invalid_rows_by_index,
 )
-from data_contract_cli.contract_models import Contract, Columns_Contract
-from data_contract_cli.validate_csv import get_invalid_rows
-from data_contract_cli.exceptions import CSVError
+from csv_refine.contract_models import Contract, Columns_Contract
+from csv_refine.validate_csv import get_invalid_rows
+from csv_refine.exceptions import CSVError
 
 
 @pytest.fixture

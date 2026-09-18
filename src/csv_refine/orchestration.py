@@ -1,8 +1,8 @@
-from data_contract_cli.contract_models import Contract, Columns_Contract
-from data_contract_cli.contract import load_and_validate_contract
-from data_contract_cli.validate_csv import load_and_validate_csv
-from data_contract_cli.row_processing import validate_and_transform_csv_values
-from data_contract_cli.validate_unique import validate_unique
+from csv_refine.contract_models import Contract, Columns_Contract
+from csv_refine.contract import load_and_validate_contract
+from csv_refine.validate_csv import load_and_validate_csv
+from csv_refine.row_processing import validate_and_transform_csv_values
+from csv_refine.validate_unique import validate_unique
 from pathlib import Path
 
 

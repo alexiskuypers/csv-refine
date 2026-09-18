@@ -2,13 +2,13 @@ import pytest, yaml
 from typing import Any
 from datetime import datetime, date
 
-from data_contract_cli.exceptions import ApplicationError, YAMLContractError
-from data_contract_cli.contract_models import (
+from csv_refine.exceptions import ApplicationError, YAMLContractError
+from csv_refine.contract_models import (
     Contract,
     Columns_Contract,
     VALID_DATE_FORMAT,
 )
-from data_contract_cli.contract import (
+from csv_refine.contract import (
     RULES,
     TRANSFORMATION,
     load_contract,

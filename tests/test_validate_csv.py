@@ -2,10 +2,10 @@ import pytest
 import csv
 
 from pathlib import Path
-from data_contract_cli.exceptions import CSVError
-from data_contract_cli.contract import load_and_validate_contract
-from data_contract_cli.contract_models import Contract, Columns_Contract
-from data_contract_cli.validate_csv import (
+from csv_refine.exceptions import CSVError
+from csv_refine.contract import load_and_validate_contract
+from csv_refine.contract_models import Contract, Columns_Contract
+from csv_refine.validate_csv import (
     load_csv,
     validate_headers,
     is_rows_empty,

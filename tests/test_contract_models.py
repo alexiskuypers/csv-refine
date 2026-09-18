@@ -1,9 +1,9 @@
-from data_contract_cli.contract_models import (
+import pytest
+from csv_refine.contract_models import (
     Contract,
     Columns_Contract,
     VALID_DATE_FORMAT,
 )
-import pytest
 
 
 def test_contract_object_with_date():

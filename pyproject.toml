@@ -1,5 +1,5 @@
 [project]
-name = "data-contract-cli"
+name = "csv-refine"
 version = "0.1.0"
 dependencies = [
     "PyYAML>=6.0.3",
@@ -12,7 +12,9 @@ readme = "README.md"
 
 
 [project.urls]
-Repository = "https://github.com/alexiskuypers/data-contract-cli"
+Homepage = "https://github.com/alexiskuypers/csv-refine"
+Repository = "https://github.com/alexiskuypers/csv-refine"
+Issues = "https://github.com/alexiskuypers/csv-refine/issues"
 
 
 [project.optional-dependencies]

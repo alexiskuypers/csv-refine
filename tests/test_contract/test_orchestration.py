@@ -3,9 +3,9 @@ from textwrap import dedent
 from decimal import Decimal
 
 
-from data_contract_cli.exceptions import ApplicationError, YAMLContractError
-from data_contract_cli.contract_models import Columns_Contract, Contract
-from data_contract_cli.contract import (
+from csv_refine.exceptions import ApplicationError, YAMLContractError
+from csv_refine.contract_models import Columns_Contract, Contract
+from csv_refine.contract import (
     RULES,
     TRANSFORMATION,
     rules_orchestration,

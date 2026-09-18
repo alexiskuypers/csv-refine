@@ -1,7 +1,7 @@
 import pytest
 import csv
 from pathlib import Path
-from data_contract_cli.contract_models import Columns_Contract, Contract
+from csv_refine.contract_models import Columns_Contract, Contract
 
 
 @pytest.fixture

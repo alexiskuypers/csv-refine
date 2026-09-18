@@ -2,8 +2,8 @@ import csv
 from pathlib import Path
 import logging
 
-from data_contract_cli.exceptions import CSVError
-from data_contract_cli.contract_models import Contract
+from csv_refine.exceptions import CSVError
+from csv_refine.contract_models import Contract
 
 logger = logging.getLogger(__name__)
 

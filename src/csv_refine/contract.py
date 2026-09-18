@@ -1,5 +1,5 @@
-from data_contract_cli.exceptions import ApplicationError, YAMLContractError
-from data_contract_cli.contract_models import (
+from csv_refine.exceptions import ApplicationError, YAMLContractError
+from csv_refine.contract_models import (
     Contract,
     Columns_Contract,
     VALID_DATE_FORMAT,

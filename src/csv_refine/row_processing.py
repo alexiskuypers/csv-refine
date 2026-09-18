@@ -3,10 +3,10 @@ from datetime import datetime, date
 from decimal import Decimal, DecimalException
 from email_validator import EmailNotValidError
 
-from data_contract_cli.contract_models import Contract, Columns_Contract
-from data_contract_cli.validate_csv import get_invalid_rows, get_valid_rows
-from data_contract_cli.exceptions import CSVError
-from data_contract_cli.value_operation import (
+from csv_refine.contract_models import Contract, Columns_Contract
+from csv_refine.validate_csv import get_invalid_rows, get_valid_rows
+from csv_refine.exceptions import CSVError
+from csv_refine.value_operation import (
     validate_str,
     convert_str_to_int,
     convert_str_to_decimal,

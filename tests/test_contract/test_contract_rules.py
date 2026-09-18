@@ -3,8 +3,8 @@ from decimal import Decimal
 from datetime import datetime, date
 
 
-from data_contract_cli.exceptions import ApplicationError, YAMLContractError
-from data_contract_cli.contract import (
+from csv_refine.exceptions import ApplicationError, YAMLContractError
+from csv_refine.contract import (
     RULES,
     TRANSFORMATION,
     validate_rules_structure,
