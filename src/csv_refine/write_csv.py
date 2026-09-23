@@ -31,7 +31,10 @@ def prepare_csv_rows(validated_classified_rows: dict) -> list:
 
 
 def write_csv(
-    validated_classified_rows: dict, contract: Contract, csv_output: Path
+    validated_classified_rows: dict,
+    contract: Contract,
+    output: Path,
+    output_filename: str,
 ) -> None:
     """Write validated rows to the output CSV file."""
     logger.info(f"Starting validated CSV export.")
@@ -40,14 +43,18 @@ def write_csv(
         validated_classified_rows=validated_classified_rows
     )
 
-    csv_output.parent.mkdir(parents=True, exist_ok=True)
+    output_filename = "validated_" + output_filename + ".csv"
+
+    output = output / output_filename
+    output.parent.mkdir(parents=True, exist_ok=True)
 
     headers = contract.headers
 
-    with csv_output.open("x", encoding=contract.encoding, newline="") as csv_file:
+    with output.open("x", encoding=contract.encoding, newline="") as csv_file:
         csv_writer = csv.DictWriter(
             csv_file, fieldnames=headers, delimiter=contract.delimiter
         )
         csv_writer.writeheader()
         csv_writer.writerows(csv_ready_data)
-    logger.info(f"Validated CSV successfully written to '{csv_output}'.")
+
+    logger.info(f"Validated CSV successfully written to '{output}'.")

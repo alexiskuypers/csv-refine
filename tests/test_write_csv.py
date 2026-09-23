@@ -88,9 +88,17 @@ def test_write_csv(tmp_path):
         ],
         "invalid_rows": [{"test": "test"}],
     }
+    file_name = "test.csv"
+    output = tmp_path
 
-    output = tmp_path / "outpout.csv"
-    write_csv(contract=contract, csv_output=output, validated_classified_rows=content)
+    write_csv(
+        contract=contract,
+        output=output,
+        output_filename=file_name,
+        validated_classified_rows=content,
+    )
+    file_name = "validated_" + file_name + ".csv"
+    output = output / file_name
 
     with output.open("r", encoding=contract.encoding, newline="") as csv_file:
         csv_file = csv.DictReader(csv_file, delimiter=contract.delimiter)

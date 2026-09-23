@@ -227,7 +227,7 @@ def test_collapse_spaces():
         (
             "test",
             3,
-            f"length of value: (test) is: '4', lenght max autorized is: 3",
+            f"Length of value: (test) is: '4', length max autorized is: 3",
         ),
         ("test", 4, None),
     ],
@@ -244,7 +244,7 @@ def test_apply_max_length_rule(value, max_length, expected):
         (
             "test",
             5,
-            f"length of value: (test) is: '4', lenght min autorized is: 5",
+            f"Length of value: (test) is: '4', length min autorized is: 5",
         ),
         ("test", 4, None),
     ],
@@ -349,10 +349,10 @@ def test_apply_max_rules(value, max_valid_value, expected):
             "Test",
             ["test", "Test1"],
             None,
-            f"the value  'Test' not in allowed values: '['test', 'Test1']'",
+            f"The value  'Test' not in allowed values: '['test', 'Test1']'",
         ),
         (1, [1, 2], None, None),
-        (-1, [1, 2], None, f"the value  '-1' not in allowed values: '[1, 2]'"),
+        (-1, [1, 2], None, f"The value  '-1' not in allowed values: '[1, 2]'"),
     ],
 )
 def test_apply_allowed_values_rule(value, allowed_values, date_format, expected):
