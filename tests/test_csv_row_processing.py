@@ -49,7 +49,7 @@ def test_apply_transformations(values, column_type, transformations, expected):
             "test ",
             "str",
             {"min_length": 10},
-            ["length of value: (test ) is: '5', lenght min autorized is: 10"],
+            ["Length of value: (test ) is: '5', length min autorized is: 10"],
         ),
         ("test", "str", {"starts_with": "te", "ends_with": "st"}, "test"),
         (
@@ -74,7 +74,7 @@ def test_apply_transformations(values, column_type, transformations, expected):
             "test-3",
             "str",
             {"allowed_values": ["test", "test-2"]},
-            ["the value  'test-3' not in allowed values: '['test', 'test-2']'"],
+            ["The value  'test-3' not in allowed values: '['test', 'test-2']'"],
         ),
         (
             "15-06-2000",
@@ -87,7 +87,7 @@ def test_apply_transformations(values, column_type, transformations, expected):
             "str",
             {"allowed_values": ["15-06-2000", "18-06-2000"]},
             [
-                "the value  '01-06-2000' not in allowed values: '['15-06-2000', '18-06-2000']'"
+                "The value  '01-06-2000' not in allowed values: '['15-06-2000', '18-06-2000']'"
             ],
         ),
         (

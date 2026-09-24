@@ -98,14 +98,14 @@ def normalize_date(row_date: str, date_format: str) -> str:
 def apply_max_length_rule(value: str, max_length_rules: int) -> str | None:
     """Return an error message if the value exceeds the maximum length."""
     if len(value) > max_length_rules:
-        return f"length of value: ({value}) is: '{len(value)}', lenght max autorized is: {max_length_rules}"
+        return f"Length of value: ({value}) is: '{len(value)}', length max autorized is: {max_length_rules}"
     return None
 
 
 def apply_min_length_rule(value: str, min_length_rules: int) -> str | None:
     """Return an error message if the value is under the minimum length."""
     if len(value) < min_length_rules:
-        return f"length of value: ({value}) is: '{len(value)}', lenght min autorized is: {min_length_rules}"
+        return f"Length of value: ({value}) is: '{len(value)}', length min autorized is: {min_length_rules}"
     return None
 
 
@@ -163,7 +163,7 @@ def apply_allowed_values_rule(
             return f"Value '{value}' is not among the allowed values: {formatted_date_values}."
 
     elif value not in allowed_values:
-        return f"the value  '{value}' not in allowed values: '{allowed_values}'"
+        return f"The value  '{value}' not in allowed values: '{allowed_values}'"
 
     return None
 
