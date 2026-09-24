@@ -1,5 +1,9 @@
-from csv_refine.contract_models import Contract
 import datetime
+import logging
+
+from csv_refine.contract_models import Contract
+
+logger = logging.getLogger(__name__)
 
 
 def count_total_errors(validated_classified_rows: dict) -> tuple:
@@ -92,6 +96,7 @@ def build_report(
     duration: float,
 ):
     """Build the validation summary report."""
+    logger.info("Start building validation report.")
     valid_rows = len(validated_classified_rows["valid_rows"])
     invalid_rows = len(validated_classified_rows["invalid_rows"])
 
@@ -101,8 +106,8 @@ def build_report(
         validated_classified_rows
     )
     collected_errors = collect_errors(validated_classified_rows)
-    rule_violations = count_rules_violations(collected_errors)
-    errors_by_category = count_errors_by_category(collected_errors, rule_violations)
+    rules_violations = count_rules_violations(collected_errors)
+    errors_by_category = count_errors_by_category(collected_errors, rules_violations)
 
     if total_rows == 0:
         valid_rows_percentage = 0
@@ -127,12 +132,21 @@ def build_report(
         "total_rows": valid_rows + invalid_rows,
         "valid_rows": valid_rows,
         "invalid_rows": invalid_rows,
-        "valid_rows_percentage": str(round(valid_rows_percentage, 2)) + " %",
+        "valid_rows_percentage": round(valid_rows_percentage, 2),
         "total_errors": count_errors,
         "rows_with_multiple_errors": rows_with_multiple_errors,
         "average_errors_per_invalid_row": round(average_errors_per_invalid_row, 2),
-        "rules_violations": rule_violations,
+        "rules_violations": dict(rules_violations),
         "errors_by_category": errors_by_category,
-        "processing_duration_ms": duration,
+        "processing_duration_ms": round(duration, 2),
     }
+    logger.info(
+        logger.info(
+            f"Validation report built successfully: "
+            f"status={status}, "
+            f"valid_rows={valid_rows}, "
+            f"invalid_rows={invalid_rows}, "
+            f"total_errors={count_errors}"
+        )
+    )
     return report
