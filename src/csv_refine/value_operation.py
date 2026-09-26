@@ -50,10 +50,9 @@ def validate_date(row_date: str, date_format: str) -> None | str:
         parsed_date = datetime.strptime(row_date.strip(), date_format).date()
     except (ValueError, TypeError):
         return (
-            f"Date '{row_date}' is invalid or does not match "
-            f"the expected format '{date_format}'."
+            f"Value '{row_date}' cannot be converted or validated to type: 'date'. "
+            f"Expected format: '{date_format}'."
         )
-    return
 
 
 def remove_accents(value: str) -> str:

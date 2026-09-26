@@ -42,11 +42,11 @@ def write_csv(
     csv_ready_data = prepare_csv_rows(
         validated_classified_rows=validated_classified_rows
     )
+    output_dir = Path(output)
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     output_filename = "validated_" + output_filename + ".csv"
-
-    output = output / output_filename
-    output.parent.mkdir(parents=True, exist_ok=True)
+    output = Path(output) / output_filename
 
     headers = contract.headers
 

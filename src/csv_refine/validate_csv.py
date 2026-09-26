@@ -50,7 +50,11 @@ def validate_headers(raw_structure: dict, contract: Contract) -> None:
     for column_name in contract.headers:
         if column_name not in headers:
             errors.append(column_name)
-            raise CSVError(f"CSV headers do not match the contract. ")
+            raise CSVError(
+                f"CSV headers do not match the contract."
+                f"Csv headers: {headers}"
+                f"Contract.headers: {contract.headers}"
+            )
 
 
 def is_rows_empty(raw_csv_rows: list) -> None:

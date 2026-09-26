@@ -61,12 +61,13 @@ def process_value_and_collect_errors(
         if column.column_type == "date":
             errors.append(f"{error}")
             strict_errors.append(f"{error}")
-        errors.append(
-            f"Value '{value}' cannot be converted or validated to type: '{column.column_type}'."
-        )
-        strict_errors.append(
-            f"Value '{value}' cannot be converted or validated to type: '{column.column_type}'."
-        )
+        else:
+            errors.append(
+                f"Value '{value}' cannot be converted or validated to type: '{column.column_type}'."
+            )
+            strict_errors.append(
+                f"Value '{value}' cannot be converted or validated to type: '{column.column_type}'."
+            )
     return errors
 
 

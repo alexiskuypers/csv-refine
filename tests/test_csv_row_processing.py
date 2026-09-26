@@ -191,11 +191,9 @@ def test_is_nullable(value, test_index, errors) -> None:
             "date",
             [
                 "Date '05-11-2000' is invalid or does not match the expected format '%Y-%m-%d'.",
-                "Value '05-11-2000' cannot be converted or validated to type: 'date'.",
             ],
             [
                 "Date '05-11-2000' is invalid or does not match the expected format '%Y-%m-%d'.",
-                "Value '05-11-2000' cannot be converted or validated to type: 'date'.",
             ],
         ),
     ],
@@ -356,7 +354,6 @@ def test_value_processing(classified_rows, test_contract):
                 "errors": [
                     "Value '4b ' cannot be converted or validated to type: 'int'.",
                     "Date ' 05/01/2002b' is invalid or does not match the expected format '%d/%m/%Y'.",
-                    "Value ' 05/01/2002b' cannot be converted or validated to type: 'date'.",
                 ],
             },
         ],

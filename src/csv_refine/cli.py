@@ -50,7 +50,7 @@ def run_csv_refine() -> int:
             yaml_contract_path=args.contract,
             csv_path=args.csv,
             mode=args.mode,
-            output=args.output,
+            output=Path(args.output),
         )
 
     except YAMLContractError as error:
