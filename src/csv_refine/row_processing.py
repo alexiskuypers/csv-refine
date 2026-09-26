@@ -74,7 +74,7 @@ def is_nullable(
     value: str, errors: list, strict_errors: list, index: int, column_name: str
 ) -> None:
     """Add an error if the value is empty and the column is not nullable."""
-    if value.strip() == "":
+    if value.strip().lower() in ("", "NaN", "nan", "N/A", "NA", "null", "NULL", "None"):
         errors.append(f"Value at row {index}, column '{column_name}', cannot be null.")
         strict_errors.append(
             f"Value at row {index}, column '{column_name}', cannot be null."
