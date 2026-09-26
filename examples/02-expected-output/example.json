@@ -1,0 +1,33 @@
+{
+    "status": "completed_with_errors",
+    "input_file": "example",
+    "mode": "permissive",
+    "generated_at": "2026-09-26 13:23:16",
+    "columns_count": 10,
+    "delimiter": ",",
+    "encoding": "utf-8-sig",
+    "total_rows": 200,
+    "valid_rows": 133,
+    "invalid_rows": 67,
+    "valid_rows_percentage": 66.5,
+    "total_errors": 117,
+    "rows_with_multiple_errors": 21,
+    "average_errors_per_invalid_row": 1.75,
+    "rules_violations": {
+        "allowed_values": 37,
+        "starts_with": 2,
+        "max_length": 0,
+        "min_length": 0,
+        "max": 0,
+        "min": 0,
+        "ends_with": 0,
+        "regex": 0
+    },
+    "errors_by_category": {
+        "rules_violations": 39,
+        "conversion_errors": 36,
+        "unique_errors": 1,
+        "nullable_errors": 41
+    },
+    "processing_duration_ms": 9.76
+}

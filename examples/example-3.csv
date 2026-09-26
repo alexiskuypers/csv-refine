@@ -1,8 +1,0 @@
-﻿product_id;product_name;category;description;price;active
-P-001;"Café moulu; arabica";Épicerie;"Paquet de 500 g";8.90;true
-P-002;"Thé vert";Boissons;"Notes florales
-et légères";6.50;true
-P-003;Chocolat noir;Épicerie;Tablette 70%;3.20
-P-004;Miel de fleurs;Épicerie;Pot de 250 g;5.80;true;promo
-P-005;Confiture d'abricot;Épicerie;;4.40;false
-

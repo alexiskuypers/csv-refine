@@ -1,0 +1,85 @@
+# YAML contract
+
+
+delimiter: ","
+encoding: utf-8-sig
+
+columns:
+  ATransaction ID:
+    type: str
+    nullable: false
+    unique: true
+    rules: {starts_with: TXN_}
+    transformations: [upper, strip]
+
+
+  Customer ID:
+    type: str
+    nullable: false
+    unique: false
+    rules: {starts_with: CUST_}
+    transformations: [strip, upper]
+
+
+  Category:
+    type: str
+    nullable: false
+    unique: false
+    rules: {allowed_values: [Computers and electric accessories, Beverages, Butchers,Furniture,Food, Computers and electric accessories, Milk Products]}
+    transformations: [strip]
+
+
+  Item:
+    type: str
+    nullable: true
+    unique: false
+    rules: {}
+    transformations: [upper]
+
+
+  Price Per Unit:
+    type: decimal
+    nullable: false
+    unique: false
+    rules: {}
+    transformations: [format_decimal]
+
+
+  Quantity:
+    type: decimal
+    date_format: "DD-MM-YYYY"
+    nullable: false
+    unique: false
+    rules: {max: 50}
+    transformations: []
+
+
+  Total Spent:
+    type: decimal
+    nullable: false
+    unique: false
+    rules: {}
+    transformations: [format_decimal]
+
+
+  Payment Method:
+    type: str
+    nullable: true
+    unique: false
+    rules: {}
+    transformations: [strip, lower]
+
+  Location:
+    type: str
+    nullable: true
+    unique: false
+    rules: {allowed_values: [Online, In-store]}
+    transformations: []
+
+  Transaction Date:
+    type: date
+    date_format: "YYYY-MM-DD"
+    nullable: true
+    unique: false
+    rules: {}
+    transformations: []

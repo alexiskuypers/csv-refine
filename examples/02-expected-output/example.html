@@ -1,0 +1,149 @@
+
+        <!DOCTYPE html>
+    <html>
+    <head>
+        <title>CSV Refine Report</title>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                margin: 40px;
+                max-width: 1000px;
+                }
+                h2 {
+                    margin-top: 32px;
+                    margin-bottom: 18px;
+                    padding-bottom: 6px;
+
+                    border-bottom: 1px solid #1F4E78;
+                    width: 75%;
+                }
+                p {
+                    margin-left: 32px;
+                }
+            table {
+                border-collapse: collapse;
+                margin-left: 32px;
+                }
+                th,
+                td {
+                    border: 1px solid;
+                    padding: 8px;
+                    text-align: left;
+                }
+
+                th {
+                    background-color: #1F4E78;
+                    color: white;
+                }
+                .status {
+                    font-weight: bold;
+                }
+
+                .status-passed {
+                    color: #15803D;
+                }
+
+                .status-errors {
+                    color: #B45309;
+                }
+        </style>
+    </head>
+
+    <body>
+        <h1>CSV Refine Report</h1>
+        <h2>Status</h2>
+
+                <p class="status status-errors">
+                    Completed with errors</p>
+                <p>Mode: permissive</p>
+                <p>Generated at: 2026-09-26 13:23:16</p>
+                <p>Processing duration in ms: 9.76</p>
+
+            <h2>File</h2>
+                <p>Input file: example</p>
+                <p>Columns count: 10</p>
+                <p>Delimiter: ','</p>
+                <p>Encoding: utf-8-sig</p>
+
+            <h2>Summary</h2>
+
+                <p>Total rows: <strong>200</strong></p>
+                <p>Valid rows: <strong>133</strong></p>
+                <p>Invalid rows: <strong>67</strong></p>
+                <p>Valid rows percentage: 66.5%</p>
+
+
+            <h2>Errors</h2>
+
+                <p>Total errors: 117</p>
+                <p>Rows with multiple errors: 21</p>
+                <p>Average errors per invalid row: 1.75</p>
+
+
+            <h2>Errors by category</h2>
+                <table>
+                    <tr>
+                        <th>Category</th>
+                        <th>Count</th>
+                    </tr>
+                    <tr>
+                        <td>Conversion errors</td>
+                        <td>36</td>
+                    </tr>
+                    <tr>
+                        <td>Rule violations</td>
+                        <td>39</td>
+                    </tr>
+                    <tr>
+                        <td>Unique errors</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Nullable errors</td>
+                        <td>41</td>
+                    </tr>
+                </table>
+
+                <h2>Rule violations</h2>
+                <table>
+                    <tr>
+                        <th>Category</th>
+                        <th>Count</th>
+                    </tr>
+                    <tr>
+                        <td>Max length</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Min length</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Max</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Min</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Allowed values</td>
+                        <td>37</td>
+                    </tr>
+                    <tr>
+                        <td>Starts with</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Ends with</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Regex</td>
+                        <td>0</td>
+                    </tr>
+                </table>
+
+    </body>
+    </html>
+    

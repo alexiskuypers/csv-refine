@@ -1,0 +1,134 @@
+﻿ATransaction ID,Customer ID,Category,Item,Price Per Unit,Quantity,Total Spent,Payment Method,Location,Transaction Date
+TXN_9303719,CUST_02,Butchers,ITEM_12_BUT,21.50,2.0,43.00,credit card,Online,2022-10-05
+TXN_9458126,CUST_06,Beverages,ITEM_16_BEV,27.50,9.0,247.50,credit card,Online,2022-05-07
+TXN_4575373,CUST_05,Food,ITEM_6_FOOD,12.50,7.0,87.50,digital wallet,Online,2022-10-02
+TXN_3652209,CUST_07,Food,ITEM_1_FOOD,5.00,8.0,40.00,credit card,In-store,2023-06-10
+TXN_9728486,CUST_23,Furniture,ITEM_16_FUR,27.50,1.0,27.50,credit card,In-store,2023-04-26
+TXN_2722661,CUST_25,Butchers,ITEM_22_BUT,36.50,3.0,109.50,cash,Online,2024-03-14
+TXN_8776416,CUST_22,Butchers,ITEM_3_BUT,8.00,9.0,72.00,cash,In-store,2024-12-14
+TXN_5874772,CUST_23,Food,ITEM_2_FOOD,6.50,7.0,45.50,cash,Online,2023-09-09
+TXN_2490363,CUST_09,Milk Products,ITEM_16_MILK,27.50,2.0,55.00,digital wallet,Online,2022-05-22
+TXN_9939063,CUST_14,Beverages,ITEM_7_BEV,14.00,9.0,126.00,digital wallet,In-store,2024-01-14
+TXN_3314099,CUST_04,Food,ITEM_10_FOOD,18.50,1.0,18.50,cash,Online,2023-09-30
+TXN_9057609,CUST_18,Butchers,ITEM_20_BUT,33.50,4.0,134.00,credit card,In-store,2022-03-16
+TXN_1599706,CUST_14,Furniture,ITEM_25_FUR,41.00,10.0,410.00,credit card,In-store,2024-03-24
+TXN_1598860,CUST_08,Food,ITEM_14_FOOD,24.50,10.0,245.00,cash,In-store,2022-10-23
+TXN_5444504,CUST_05,Food,ITEM_11_FOOD,20.00,10.0,200.00,digital wallet,Online,2022-04-26
+TXN_6398436,CUST_15,Beverages,ITEM_25_BEV,41.00,7.0,287.00,credit card,In-store,2024-06-03
+TXN_6963438,CUST_11,Furniture,ITEM_10_FUR,18.50,5.0,92.50,credit card,Online,2024-04-23
+TXN_8312797,CUST_14,Beverages,ITEM_11_BEV,20.00,5.0,100.00,digital wallet,Online,2022-06-03
+TXN_5836005,CUST_19,Butchers,ITEM_23_BUT,38.00,5.0,190.00,credit card,In-store,2024-10-19
+TXN_4223250,CUST_16,Beverages,ITEM_22_BEV,36.50,7.0,255.50,cash,Online,2023-05-31
+TXN_1110407,CUST_25,Butchers,ITEM_24_BUT,39.50,7.0,276.50,digital wallet,In-store,2022-10-21
+TXN_6276518,CUST_24,Beverages,ITEM_8_BEV,15.50,3.0,46.50,cash,In-store,2024-04-08
+TXN_4740738,CUST_25,Food,ITEM_3_FOOD,8.00,1.0,8.00,digital wallet,In-store,2022-04-19
+TXN_9587232,CUST_20,Food,ITEM_12_FOOD,21.50,5.0,107.50,digital wallet,Online,2023-02-28
+TXN_6404316,CUST_04,Computers and electric accessories,ITEM_16_CEA,27.50,6.0,165.00,credit card,Online,2022-04-06
+TXN_8425168,CUST_25,Milk Products,ITEM_16_MILK,27.50,7.0,192.50,cash,In-store,2022-03-12
+TXN_5379241,CUST_05,Butchers,ITEM_20_BUT,33.50,10.0,335.00,credit card,In-store,2023-04-12
+TXN_4836321,CUST_21,Food,ITEM_12_FOOD,21.50,10.0,215.00,digital wallet,In-store,2023-01-14
+TXN_9451794,CUST_24,Milk Products,ITEM_19_MILK,32.00,3.0,96.00,credit card,Online,2024-01-28
+TXN_8218431,CUST_01,Furniture,ITEM_23_FUR,38.00,5.0,190.00,digital wallet,Online,2023-04-29
+TXN_7909783,CUST_12,Computers and electric accessories,ITEM_5_CEA,11.00,1.0,11.00,credit card,Online,2023-12-17
+TXN_5046007,CUST_07,Computers and electric accessories,ITEM_15_CEA,26.00,9.0,234.00,cash,Online,2024-07-22
+TXN_6966182,CUST_02,Furniture,ITEM_16_FUR,27.50,9.0,247.50,cash,Online,2024-09-06
+TXN_3424571,CUST_09,Milk Products,ITEM_6_MILK,12.50,7.0,87.50,credit card,Online,2023-01-13
+TXN_6820452,CUST_10,Computers and electric accessories,ITEM_24_CEA,39.50,8.0,316.00,credit card,In-store,2023-04-18
+TXN_1998771,CUST_25,Milk Products,ITEM_16_MILK,27.50,3.0,82.50,digital wallet,Online,2024-11-07
+TXN_5418871,CUST_04,Computers and electric accessories,ITEM_22_CEA,36.50,7.0,255.50,cash,In-store,2022-03-16
+TXN_6952276,CUST_01,Food,ITEM_22_FOOD,36.50,10.0,365.00,credit card,Online,2024-08-02
+TXN_6340470,CUST_17,Butchers,ITEM_2_BUT,6.50,6.0,39.00,credit card,In-store,2022-10-12
+TXN_2719047,CUST_03,Butchers,ITEM_20_BUT,33.50,4.0,134.00,credit card,Online,2023-11-21
+TXN_9908330,CUST_19,Food,ITEM_18_FOOD,30.50,4.0,122.00,credit card,Online,2022-09-29
+TXN_5973228,CUST_12,Beverages,ITEM_7_BEV,14.00,6.0,84.00,digital wallet,Online,2023-12-25
+TXN_2780662,CUST_02,Milk Products,ITEM_19_MILK,32.00,10.0,320.00,digital wallet,In-store,2023-01-19
+TXN_1142481,CUST_02,Beverages,ITEM_22_BEV,36.50,6.0,219.00,cash,In-store,2023-02-07
+TXN_3933685,CUST_09,Computers and electric accessories,ITEM_20_CEA,33.50,10.0,335.00,credit card,Online,2022-04-15
+TXN_8955685,CUST_24,Food,ITEM_20_FOOD,33.50,2.0,67.00,digital wallet,Online,2023-04-24
+TXN_1061030,CUST_20,Computers and electric accessories,ITEM_22_CEA,36.50,4.0,146.00,digital wallet,Online,2024-07-14
+TXN_8024803,CUST_09,Furniture,ITEM_11_FUR,20.00,8.0,160.00,digital wallet,In-store,2024-08-22
+TXN_8244728,CUST_08,Food,ITEM_7_FOOD,14.00,1.0,14.00,credit card,In-store,2024-04-27
+TXN_3858145,CUST_17,Furniture,ITEM_21_FUR,35.00,3.0,105.00,digital wallet,Online,2023-04-01
+TXN_3731986,CUST_18,Furniture,ITEM_24_FUR,39.50,9.0,355.50,credit card,In-store,2022-12-07
+TXN_2414530,CUST_24,Milk Products,ITEM_8_MILK,15.50,8.0,124.00,cash,Online,2024-06-20
+TXN_3035546,CUST_19,Beverages,ITEM_14_BEV,24.50,2.0,49.00,credit card,In-store,2023-07-12
+TXN_5705131,CUST_19,Milk Products,ITEM_4_MILK,9.50,4.0,38.00,digital wallet,Online,2024-03-27
+TXN_5938028,CUST_18,Computers and electric accessories,ITEM_7_CEA,14.00,1.0,14.00,digital wallet,Online,2023-02-20
+TXN_9619859,CUST_01,Butchers,ITEM_21_BUT,35.00,4.0,140.00,cash,In-store,2024-04-05
+TXN_6158929,CUST_21,Food,ITEM_11_FOOD,20.00,6.0,120.00,cash,Online,2022-01-29
+TXN_7209607,CUST_25,Food,ITEM_18_FOOD,30.50,6.0,183.00,credit card,In-store,2023-08-25
+TXN_5328604,CUST_07,Food,ITEM_20_FOOD,33.50,10.0,335.00,cash,Online,2024-07-08
+TXN_9464391,CUST_04,Food,ITEM_18_FOOD,30.50,10.0,305.00,cash,Online,2023-11-17
+TXN_2940500,CUST_06,Computers and electric accessories,ITEM_25_CEA,41.00,1.0,41.00,cash,In-store,2024-11-05
+TXN_1945960,CUST_09,Butchers,ITEM_8_BUT,15.50,10.0,155.00,digital wallet,In-store,2023-04-06
+TXN_8219228,CUST_17,Computers and electric accessories,ITEM_10_CEA,18.50,5.0,92.50,cash,Online,2022-05-27
+TXN_5471094,CUST_14,Butchers,ITEM_2_BUT,6.50,3.0,19.50,digital wallet,In-store,2022-08-24
+TXN_9255329,CUST_01,Furniture,ITEM_25_FUR,41.00,7.0,287.00,digital wallet,In-store,2022-03-02
+TXN_9279462,CUST_25,Furniture,ITEM_5_FUR,11.00,3.0,33.00,credit card,In-store,2022-02-05
+TXN_7956502,CUST_06,Butchers,ITEM_8_BUT,15.50,7.0,108.50,credit card,In-store,2024-04-30
+TXN_1352831,CUST_04,Food,ITEM_22_FOOD,36.50,3.0,109.50,credit card,Online,2023-10-31
+TXN_4372655,CUST_08,Food,ITEM_9_FOOD,17.00,7.0,119.00,cash,In-store,2024-11-03
+TXN_7655704,CUST_11,Computers and electric accessories,ITEM_21_CEA,35.00,8.0,280.00,digital wallet,Online,2022-08-08
+TXN_6908058,CUST_25,Computers and electric accessories,ITEM_8_CEA,15.50,10.0,155.00,cash,In-store,2023-07-22
+TXN_9204828,CUST_07,Computers and electric accessories,ITEM_25_CEA,41.00,7.0,287.00,cash,Online,2022-03-05
+TXN_2212643,CUST_09,Food,ITEM_3_FOOD,8.00,4.0,32.00,credit card,In-store,2022-12-29
+TXN_8215469,CUST_17,Milk Products,ITEM_23_MILK,38.00,10.0,380.00,digital wallet,In-store,2024-03-16
+TXN_3403695,CUST_25,Beverages,ITEM_23_BEV,38.00,8.0,304.00,cash,Online,2024-09-27
+TXN_2878134,CUST_18,Butchers,ITEM_8_BUT,15.50,9.0,139.50,credit card,In-store,2024-05-10
+TXN_3123571,CUST_15,Furniture,ITEM_23_FUR,38.00,3.0,114.00,digital wallet,Online,2022-08-07
+TXN_9940030,CUST_25,Beverages,ITEM_19_BEV,32.00,6.0,192.00,credit card,In-store,2022-01-19
+TXN_6195024,CUST_13,Beverages,ITEM_20_BEV,33.50,5.0,167.50,cash,Online,2024-08-09
+TXN_6923419,CUST_17,Furniture,ITEM_5_FUR,11.00,8.0,88.00,digital wallet,Online,2022-06-28
+TXN_1112365,CUST_19,Food,ITEM_24_FOOD,39.50,10.0,395.00,cash,Online,2023-09-24
+TXN_6989569,CUST_11,Milk Products,ITEM_21_MILK,35.00,2.0,70.00,credit card,In-store,2022-01-17
+TXN_5647023,CUST_12,Furniture,ITEM_24_FUR,39.50,4.0,158.00,digital wallet,In-store,2022-04-14
+TXN_8049831,CUST_18,Beverages,ITEM_6_BEV,12.50,2.0,25.00,cash,In-store,2023-01-05
+TXN_3831408,CUST_18,Milk Products,ITEM_1_MILK,5.00,10.0,50.00,digital wallet,Online,2022-02-11
+TXN_1249742,CUST_05,Milk Products,ITEM_24_MILK,39.50,10.0,395.00,digital wallet,Online,2024-03-21
+TXN_4633046,CUST_13,Computers and electric accessories,ITEM_2_CEA,6.50,5.0,32.50,digital wallet,Online,2023-08-25
+TXN_3519817,CUST_22,Butchers,ITEM_18_BUT,30.50,4.0,122.00,digital wallet,Online,2022-06-14
+TXN_4801202,CUST_16,Furniture,ITEM_1_FUR,5.00,3.0,15.00,digital wallet,Online,2024-05-31
+TXN_6149882,CUST_09,Beverages,ITEM_20_BEV,33.50,1.0,33.50,credit card,Online,2023-01-22
+TXN_8809000,CUST_23,Milk Products,ITEM_3_MILK,8.00,3.0,24.00,cash,In-store,2023-01-10
+TXN_5111184,CUST_19,Milk Products,ITEM_11_MILK,20.00,6.0,120.00,credit card,Online,2024-07-18
+TXN_2565828,CUST_21,Food,ITEM_24_FOOD,39.50,10.0,395.00,credit card,Online,2022-02-18
+TXN_6312937,CUST_14,Computers and electric accessories,ITEM_13_CEA,23.00,2.0,46.00,digital wallet,In-store,2024-02-09
+TXN_8775503,CUST_08,Computers and electric accessories,ITEM_6_CEA,12.50,2.0,25.00,digital wallet,In-store,2024-10-11
+TXN_3541663,CUST_25,Furniture,ITEM_2_FUR,6.50,5.0,32.50,digital wallet,In-store,2023-07-19
+TXN_4947386,CUST_13,Food,ITEM_18_FOOD,30.50,10.0,305.00,cash,Online,2024-11-12
+TXN_4276451,CUST_17,Beverages,ITEM_22_BEV,36.50,1.0,36.50,credit card,Online,2024-05-27
+TXN_3380295,CUST_08,Beverages,ITEM_6_BEV,12.50,5.0,62.50,cash,Online,2023-02-08
+TXN_8616546,CUST_09,Beverages,ITEM_21_BEV,35.00,8.0,280.00,credit card,Online,2023-04-01
+TXN_1804192,CUST_20,Furniture,ITEM_8_FUR,15.50,9.0,139.50,cash,Online,2024-06-07
+TXN_5046818,CUST_02,Butchers,ITEM_22_BUT,36.50,6.0,219.00,digital wallet,In-store,2024-07-03
+TXN_4626993,CUST_24,Butchers,ITEM_13_BUT,23.00,7.0,161.00,credit card,Online,2023-08-23
+TXN_5256349,CUST_25,Beverages,ITEM_2_BEV,6.50,4.0,26.00,digital wallet,Online,2022-09-27
+TXN_1882210,CUST_13,Food,ITEM_14_FOOD,24.50,4.0,98.00,digital wallet,In-store,2022-03-02
+TXN_2196324,CUST_11,Butchers,ITEM_21_BUT,35.00,9.0,315.00,cash,In-store,2024-02-08
+TXN_7020797,CUST_22,Food,ITEM_9_FOOD,17.00,5.0,85.00,digital wallet,In-store,2024-04-20
+TXN_7594834,CUST_22,Furniture,ITEM_25_FUR,41.00,1.0,41.00,credit card,In-store,2024-03-16
+TXN_3229559,CUST_02,Beverages,ITEM_7_BEV,14.00,9.0,126.00,digital wallet,Online,2022-12-02
+TXN_1336269,CUST_19,Beverages,ITEM_7_BEV,14.00,6.0,84.00,digital wallet,Online,2024-12-25
+TXN_8784273,CUST_25,Computers and electric accessories,ITEM_14_CEA,24.50,4.0,98.00,cash,In-store,2022-05-02
+TXN_1132339,CUST_01,Beverages,ITEM_11_BEV,20.00,4.0,80.00,credit card,Online,2023-07-12
+TXN_8283332,CUST_16,Beverages,ITEM_23_BEV,38.00,6.0,228.00,cash,Online,2023-11-13
+TXN_9496190,CUST_18,Computers and electric accessories,ITEM_18_CEA,30.50,3.0,91.50,cash,Online,2024-02-24
+TXN_4448047,CUST_03,Milk Products,ITEM_8_MILK,15.50,6.0,93.00,credit card,Online,2022-06-15
+TXN_3338914,CUST_16,Food,ITEM_20_FOOD,33.50,10.0,335.00,digital wallet,Online,2024-05-29
+TXN_8959624,CUST_09,Milk Products,ITEM_1_MILK,5.00,7.0,35.00,digital wallet,Online,2024-12-18
+TXN_1821423,CUST_22,Furniture,ITEM_25_FUR,41.00,2.0,82.00,credit card,Online,2022-01-13
+TXN_9760482,CUST_07,Computers and electric accessories,ITEM_11_CEA,20.00,9.0,180.00,digital wallet,In-store,2023-01-06
+TXN_8460432,CUST_15,Furniture,ITEM_5_FUR,11.00,8.0,88.00,digital wallet,Online,2022-02-05
+TXN_8136588,CUST_07,Milk Products,ITEM_16_MILK,27.50,7.0,192.50,digital wallet,In-store,2022-10-24
+TXN_6630594,CUST_07,Milk Products,ITEM_3_MILK,8.00,5.0,40.00,cash,In-store,2023-12-03
+TXN_4844684,CUST_20,Butchers,ITEM_20_BUT,33.50,5.0,167.50,digital wallet,Online,2022-07-23
+TXN_9882772,CUST_09,Furniture,ITEM_17_FUR,29.00,9.0,261.00,cash,Online,2023-08-07
+TXN_2611065,CUST_04,Milk Products,ITEM_15_MILK,26.00,8.0,208.00,cash,In-store,2023-02-05
+TXN_2749184,CUST_24,Food,ITEM_20_FOOD,33.50,5.0,167.50,credit card,Online,2023-04-18
+TXN_4879766,CUST_13,Computers and electric accessories,ITEM_20_CEA,33.50,4.0,134.00,digital wallet,Online,2023-06-03
+TXN_2755139,CUST_21,Milk Products,ITEM_4_MILK,9.50,1.0,9.50,digital wallet,Online,2023-12-19
+TXN_1484334,CUST_01,Butchers,ITEM_7_BUT,14.00,3.0,42.00,cash,Online,2023-03-19
+TXN_9177662,CUST_21,Computers and electric accessories,ITEM_16_CEA,27.50,9.0,247.50,digital wallet,In-store,2023-12-25
+TXN_8973416,CUST_13,Butchers,ITEM_13_BUT,23.00,65.0,138.00,cash,In-store,2022-09-10
+TXN_5487046,CUST_22,Computers and electric accessories,ITEM_19_CEA,32.00,9.0,288.00,cash,Online,2022-06-06
+TXN_5945222,CUST_04,Butchers,ITEM_20_BUT,33.50,5.0,167.50,digital wallet,In-store,2024-08-11

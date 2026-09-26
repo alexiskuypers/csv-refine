@@ -1,8 +1,0 @@
-invoice_id,customer_name,customer_email,amount,invoice_date,status
-INV-001,Alice Martin,alice@example.com,1200.50,2026-06-14,paid
-INV-002,"Bernard, Louis",bernard@example.com,450.00,15/06/2026,pending
-INV-003,Chloe Dubois,chloe@example.com,89.90,2026-06-16
-INV-004,David Leroy,david@example.com,240.00,2026-06-17,paid,priority
-INV-005,,eva@example.com,,2026-06-18,pending
-
-INV-006,Félix Noël,felix@example.com,315.75,18/06/2026,cancelled
