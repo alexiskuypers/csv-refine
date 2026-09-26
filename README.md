@@ -1,122 +1,145 @@
-# data-contract-cli
+# CSV Refine
 
-A Python CLI for validating and normalizing CSV files using YAML data contracts.
+CSV Refine is a Python CLI for cleaning, filtering, and normalizing CSV files.
 
-## Objective
+It lets you define exactly how each column should be validated, cleaned, and normalized through a YAML contract. CSV Refine then separates valid and invalid rows and generates reports to assess the overall health of the dataset.
 
-`data-contract-cli` is designed to validate CSV files before they are imported into backend systems, databases, CRMs, ERPs, or internal workflows.
+## Features
 
-A YAML contract defines the expected columns, data types, validation rules, and transformations. The tool will use this contract to identify invalid rows, normalize valid values, and generate structured output reports.
-
-This project is being developed as part of my backend Python learning roadmap. Its main purpose is to practise robust file processing, validation, error handling, logging, testing, and CLI development.
-
-## Planned features
-
-* Validate CSV columns against a YAML contract
-* Validate values row by row
-* Normalize valid values
-* Separate valid and invalid rows
-* Generate a clean CSV file
-* Generate a CSV error report
-* Generate a JSON execution summary
-* Validate YAML contracts
-* Support strict and permissive validation modes
-* Return explicit exit codes
-* Generate a starter contract from a CSV file
+- Clean and normalize messy CSV data
+- Filter out invalid rows while preserving valid data
+- Detect missing values, duplicates, invalid formats, and rule violations
+- Separate valid and invalid rows into dedicated CSV files
+- Generate JSON and HTML reports to assess CSV data quality
 
 ## Installation
 
 ```bash
-git clone https://github.com/alexiskuypers/data-contract-cli.git
-cd data-contract-cli
+git clone https://github.com/alexiskuypers/csv-refine.git
+cd csv-refine
+
+python3 -m venv .venv
+source .venv/bin/activate
+
+pip install -e .
 ```
 
-The installation process will be documented once the first executable version is available.
-
-## Strict and permissive modes
-
-The validation command can run in either strict or permissive mode.
-
-### Strict mode
-
-In strict mode, the program stops when the CSV structure does not exactly match the contract.
-
-The program stops if:
-
-* an expected column is missing;
-* the CSV contains a column that is not defined in the contract.
-
-When the program stops:
-
-* no output files are generated;
-* an error message is displayed in the terminal;
-* the command returns a non-zero exit code;
-* technical details are written to the logs.
-
-### Permissive mode
-
-In permissive mode, the program allows some differences between the CSV and the contract.
-
-The program stops if:
-
-* a column marked as `required: true` is missing.
-
-The program continues if:
-
-* an optional column is missing;
-* the CSV contains a column that is not defined in the contract.
-
-When processing continues:
-
-* unexpected columns are preserved without modification;
-* missing optional columns are reported;
-* transformations and validation rules are applied only to matching columns;
-* the clean CSV, error CSV and summary JSON are generated;
-* warnings are displayed in the terminal;
-* complete details are included in the summary JSON and logs.
-
-## Planned usage
-
-Validate a CSV file:
+Check the CLI:
 
 ```bash
-data-contract validate input.csv --contract contract.yml
+csv-refine --help
 ```
 
-Validate a contract:
+## Quick start
 
 ```bash
-data-contract check-contract contract.yml
+csv-refine \
+  --contract examples/01-input/example-contract.yaml \
+  --csv examples/01-input/example.csv \
+  --mode permissive
 ```
 
-Generate a starter contract:
+By default, generated files are written to `output/`.
 
-```bash
-data-contract init-contract input.csv --output contract.yml
+A custom output directory can be provided with `--output`.
+
+## YAML contract
+
+CSV Refine is configured through a YAML contract that defines exactly how each column should be validated and normalized.
+
+A contract can define data types, nullability, uniqueness, validation rules, transformations, delimiter, and encoding.
+
+Example:
+
+```yaml
+columns:
+  Transaction ID:
+    type: str
+    nullable: false
+    unique: true
+    rules:
+      starts_with: "TXN_"
 ```
 
-These commands describe the planned CLI interface and are not yet available.
+For the complete contract syntax and all supported options, see the [contract README](contracts/README.md).
 
-## Project structure
+## Validation modes
+
+### Permissive
+
+Invalid rows are collected while processing continues.
+
+### Strict
+
+Structural, type conversion, nullability, and uniqueness failures can stop processing.
+
+Validation-rule violations still act as row filters.
+
+## Outputs
+
+CSV Refine generates:
 
 ```text
-data-contract-cli/
-├── examples/
-├── src/
-│   └── data_contract_cli/
-│       └── cli.py
-├── tests/
-├── README.md
-└── pyproject.toml
+output/
+├── validated_example.csv
+├── errors_example.csv
+├── report_example.json
+└── report_example.html
 ```
+
+- **Validated CSV** — valid rows with transformations applied
+- **Error CSV** — invalid rows with their detected errors
+- **JSON report** — machine-readable summary
+- **HTML report** — human-readable overview of CSV health
+
+The original CSV is never modified.
+
+## Real-world example
+
+The repository includes a 200-row retail dataset containing missing values, invalid categories, malformed identifiers, duplicate values, invalid dates, and conversion errors.
+
+```text
+examples/
+├── 01-input/
+│   ├── example.csv
+│   └── example-contract.yaml
+└── 02-expected-output/
+    ├── validated_example.csv
+    ├── errors_example.csv
+    ├── report_example.json
+    └── report_example.html
+```
+
+Run the example with:
+
+```bash
+csv-refine \
+  --contract examples/01-input/example-contract.yaml \
+  --csv examples/01-input/example.csv \
+  --mode permissive
+```
+
+Example result:
+
+```text
+Total rows:    200
+Valid rows:    133
+Invalid rows:   67
+Total errors:  117
+```
+
+## Tests
+
+Run the test suite with:
+
+```bash
+python3 -m pytest
+```
+
+## Stack
+
+Python 3.12+, PyYAML, email-validator, pytest, argparse, pathlib, logging.
 
 ## Status
 
-The project is currently in its initial development stage.
-
-## Next steps
-
-* Define the first validation contract format
-* Implement the initial CLI entry point
-* Add a minimal CSV example
-* Create the first contract validation issue
+**Version 1 is functionally complete.**
