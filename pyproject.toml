@@ -11,6 +11,10 @@ description = "A Python CLI for validating and normalizing CSV files using YAML 
 readme = "README.md"
 
 
+[project.scripts]
+csv-refine = "csv_refine.cli:run_csv_refine"
+
+
 [project.urls]
 Homepage = "https://github.com/alexiskuypers/csv-refine"
 Repository = "https://github.com/alexiskuypers/csv-refine"
@@ -19,3 +23,5 @@ Issues = "https://github.com/alexiskuypers/csv-refine/issues"
 
 [project.optional-dependencies]
 dev = ["pytest>=9.1.1"]
+
+
