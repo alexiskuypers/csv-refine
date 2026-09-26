@@ -158,17 +158,17 @@ def test_validate_date_returns_None(valid_date, date_format, expected):
         (
             "12/06",
             "%d/%m/%Y",
-            "Date '12/06' is invalid or does not match the expected format '%d/%m/%Y'.",
+            "Value '12/06' cannot be converted or validated to type: 'date'. Expected format: '%d/%m/%Y'.",
         ),
         (
             "12_06/2020",
             "%d/%m/%Y",
-            "Date '12_06/2020' is invalid or does not match the expected format '%d/%m/%Y'.",
+            "Value '12_06/2020' cannot be converted or validated to type: 'date'. Expected format: '%d/%m/%Y'.",
         ),
         (
             "31/02/2005",
             "%d/%m/%Y",
-            "Date '31/02/2005' is invalid or does not match the expected format '%d/%m/%Y'.",
+            "Value '31/02/2005' cannot be converted or validated to type: 'date'. Expected format: '%d/%m/%Y'.",
         ),
     ],
 )
