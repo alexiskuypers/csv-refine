@@ -130,25 +130,21 @@ Total errors:  117
 
 The original dataset contains missing values, invalid formats, duplicates, and values that do not comply with the configured data contract.
 
-![Raw CSV input](docs/images/raw-csv.png)
+![Raw CSV input](https://raw.githubusercontent.com/alexiskuypers/csv-refine/main/docs/images/raw-csv.png)
 
 ### Validated rows
 
 Rows that successfully pass the contract validation are cleaned, normalized, and written to a dedicated CSV file.
 
-![Validated CSV output](docs/images/validated-csv.png)
+![Validated CSV output](https://raw.githubusercontent.com/alexiskuypers/csv-refine/main/docs/images/validated-csv.png)
 
 ### Invalid rows and detected errors
 
 Invalid rows are separated from the validated dataset and include the errors detected during processing.
 
-![CSV errors output](docs/images/errors-csv.png)
+![CSV errors output](https://raw.githubusercontent.com/alexiskuypers/csv-refine/main/docs/images/errors-csv.png)
 
 ### Data quality report
-
-CSV Refine generates an HTML report summarizing the overall quality of the dataset and the errors detected during processing.
-
-![CSV Refine HTML report](docs/images/html-report.png)
 
 ## Development
 
@@ -178,4 +174,4 @@ Python 3.12+, PyYAML, email-validator, pytest, argparse, pathlib, logging.
 
 ## Status
 
-**Version 0.1.1 is available on [PyPI](https://pypi.org/project/csv-refine/).**
+**Version 0.1.2 is available on [PyPI](https://pypi.org/project/csv-refine/).**
