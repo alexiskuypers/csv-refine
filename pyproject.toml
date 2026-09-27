@@ -1,14 +1,21 @@
+[build-system]
+requires = ["setuptools>=77.0.3"]
+build-backend = "setuptools.build_meta"
+
+
 [project]
 name = "csv-refine"
 version = "0.1.0"
+description = "A Python CLI for cleaning, filtering, and normalizing CSV files using configurable YAML data contracts."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
+
 dependencies = [
     "PyYAML>=6.0.3",
     "email-validator>=2.3.0"
 ]
-requires-python = ">=3.12"
-
-description = "A Python CLI for validating and normalizing CSV files using YAML data contracts."
-readme = "README.md"
 
 
 [project.scripts]
@@ -23,5 +30,3 @@ Issues = "https://github.com/alexiskuypers/csv-refine/issues"
 
 [project.optional-dependencies]
 dev = ["pytest>=9.1.1"]
-
-
