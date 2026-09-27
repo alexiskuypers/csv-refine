@@ -14,14 +14,10 @@ It lets you define exactly how each column should be validated, cleaned, and nor
 
 ## Installation
 
+Install CSV Refine from PyPI:
+
 ```bash
-git clone https://github.com/alexiskuypers/csv-refine.git
-cd csv-refine
-
-python3 -m venv .venv
-source .venv/bin/activate
-
-pip install -e .
+pip install csv-refine
 ```
 
 Check the CLI:
@@ -83,8 +79,8 @@ CSV Refine generates:
 output/
 ├── validated_example.csv
 ├── errors_example.csv
-├── report_example.json
-└── report_example.html
+├── example.json
+└── example.html
 ```
 
 - **Validated CSV** — valid rows with transformations applied
@@ -106,8 +102,8 @@ examples/
 └── 02-expected-output/
     ├── validated_example.csv
     ├── errors_example.csv
-    ├── report_example.json
-    └── report_example.html
+    ├── example.json
+    └── example.html
 ```
 
 Run the example with:
@@ -128,6 +124,46 @@ Invalid rows:   67
 Total errors:  117
 ```
 
+## Preview
+
+### Raw CSV
+
+The original dataset contains missing values, invalid formats, duplicates, and values that do not comply with the configured data contract.
+
+![Raw CSV input](docs/images/raw-csv.png)
+
+### Validated rows
+
+Rows that successfully pass the contract validation are cleaned, normalized, and written to a dedicated CSV file.
+
+![Validated CSV output](docs/images/validated-csv.png)
+
+### Invalid rows and detected errors
+
+Invalid rows are separated from the validated dataset and include the errors detected during processing.
+
+![CSV errors output](docs/images/errors-csv.png)
+
+### Data quality report
+
+CSV Refine generates an HTML report summarizing the overall quality of the dataset and the errors detected during processing.
+
+![CSV Refine HTML report](docs/images/html-report.png)
+
+## Development
+
+Clone the repository:
+
+```bash
+git clone https://github.com/alexiskuypers/csv-refine.git
+cd csv-refine
+
+python3 -m venv .venv
+source .venv/bin/activate
+
+pip install -e ".[dev]"
+```
+
 ## Tests
 
 Run the test suite with:
@@ -142,4 +178,4 @@ Python 3.12+, PyYAML, email-validator, pytest, argparse, pathlib, logging.
 
 ## Status
 
-**Version 1 is functionally complete.**
+**Version 0.1.1 is available on [PyPI](https://pypi.org/project/csv-refine/).**
