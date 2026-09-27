@@ -146,6 +146,10 @@ Invalid rows are separated from the validated dataset and include the errors det
 
 ### Data quality report
 
+CSV Refine generates an HTML report summarizing the overall quality of the dataset and the errors detected during processing.
+
+![CSV Refine HTML report](https://raw.githubusercontent.com/alexiskuypers/csv-refine/main/docs/images/html-report.png)
+
 ## Development
 
 Clone the repository:
@@ -174,4 +178,4 @@ Python 3.12+, PyYAML, email-validator, pytest, argparse, pathlib, logging.
 
 ## Status
 
-**Version 0.1.2 is available on [PyPI](https://pypi.org/project/csv-refine/).**
+**Version 0.1.3 is available on [PyPI](https://pypi.org/project/csv-refine/).**
